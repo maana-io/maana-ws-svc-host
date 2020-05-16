@@ -1,0 +1,1604 @@
+{
+  "version": 1,
+  "id": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
+  "name": "Simple",
+  "kinds": [
+    {
+      "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+      "name": "Buzz",
+      "description": "",
+      "service": {
+        "id": "donald-simple",
+        "name": "Simple"
+      },
+      "schema": [
+        {
+          "id": "6d42f0dc-ca18-4159-abe3-9cb1ec1a9884",
+          "name": "id",
+          "type": "ID",
+          "typeKindId": "",
+          "modifiers": [
+            "NONULL"
+          ],
+          "kind": null
+        },
+        {
+          "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384",
+          "name": "json",
+          "type": "JSON",
+          "typeKindId": "",
+          "modifiers": [],
+          "kind": null
+        }
+      ],
+      "data": []
+    },
+    {
+      "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
+      "name": "Fizz",
+      "description": "",
+      "service": {
+        "id": "donald-simple",
+        "name": "Simple"
+      },
+      "schema": [
+        {
+          "id": "8932df86-3f5b-4527-8398-5ae585739ab6",
+          "name": "id",
+          "type": "ID",
+          "typeKindId": "",
+          "modifiers": [
+            "NONULL"
+          ],
+          "kind": null
+        },
+        {
+          "id": "a35d961a-9cab-43e7-a991-e4a2fc350294",
+          "name": "createdOn",
+          "type": "DATETIME",
+          "typeKindId": "",
+          "modifiers": [
+            "NONULL"
+          ],
+          "kind": null
+        },
+        {
+          "id": "2d9c394c-614e-4876-8334-c35238657cc9",
+          "name": "buzz",
+          "type": "KIND",
+          "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+          "modifiers": [
+            "NONULL"
+          ],
+          "kind": {
+            "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+            "name": "Buzz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            }
+          }
+        }
+      ],
+      "data": []
+    }
+  ],
+  "functions": [
+    {
+      "id": "c1dd3789-fb9c-4bf8-a318-504e8868be6b",
+      "name": "baz",
+      "description": null,
+      "service": {
+        "id": "donald-simple",
+        "name": "Simple"
+      },
+      "arguments": [
+        {
+          "id": "6c2f2b02-bd82-4a0b-9f34-4e5f463040e7",
+          "name": "buzz",
+          "type": "KIND",
+          "modifiers": [
+            "NONULL"
+          ],
+          "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+          "kind": {
+            "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+            "name": "Buzz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            }
+          }
+        }
+      ],
+      "implementation": {
+        "id": "5b26e2ee-403f-47ad-ba17-ab04e1bc8293",
+        "entrypoint": {
+          "id": "3e6ee2f9-b4bc-44df-a497-97e25ec3a587"
+        },
+        "operations": [
+          {
+            "id": "3e6ee2f9-b4bc-44df-a497-97e25ec3a587",
+            "type": "APPLY",
+            "function": {
+              "id": "fc95dee5-1193-4328-9fc9-7276b6d17b14",
+              "name": "baz",
+              "service": {
+                "id": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda",
+                "name": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "3f38f6fc-9b6a-4b56-982d-dea7e3e0801e",
+                "argument": {
+                  "id": "57123197-8067-45fe-9ab3-f61c016e5620",
+                  "name": "buzz"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "6c2f2b02-bd82-4a0b-9f34-4e5f463040e7",
+                  "name": "buzz"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "MUTATION",
+      "outputType": "STRING",
+      "outputKindId": null,
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kind": null,
+      "graph": {
+        "zoom": 100,
+        "offsetX": -20,
+        "offsetY": -4,
+        "nodes": [
+          {
+            "id": "6184f4bc-7e8b-4fd8-b5d4-423a8fe149cdINPUT",
+            "x": 32,
+            "y": 32,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "d59a36e8-44cc-41d4-ac14-fcfb1ba6d22dOUTPUT",
+            "x": 1088,
+            "y": 32,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "8b100e48-f8d3-4532-83eb-acb6af08284f",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": "3e6ee2f9-b4bc-44df-a497-97e25ec3a587"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dcc895b8-2610-4af4-bc9e-cf1d0c1f4c77",
+      "name": "qux",
+      "description": null,
+      "service": {
+        "id": "donald-simple",
+        "name": "Simple"
+      },
+      "arguments": [
+        {
+          "id": "f98555ca-bddf-4e6c-9d84-a8640ff1f9fd",
+          "name": "bar",
+          "type": "STRING",
+          "modifiers": [
+            "NONULL"
+          ],
+          "typeKindId": null,
+          "kind": null
+        },
+        {
+          "id": "0850d45d-a37c-4138-bfea-9f98ef5ccb23",
+          "name": "baz",
+          "type": "STRING",
+          "modifiers": [
+            "NONULL"
+          ],
+          "typeKindId": null,
+          "kind": null
+        }
+      ],
+      "implementation": {
+        "id": "993976f7-c389-49e1-ac3e-50f265272092",
+        "entrypoint": {
+          "id": "a9a2a713-58c9-4618-b54c-5e1ab98f5c71"
+        },
+        "operations": [
+          {
+            "id": "a9a2a713-58c9-4618-b54c-5e1ab98f5c71",
+            "type": "APPLY",
+            "function": {
+              "id": "7e354e54-0ce0-4da0-8b72-fb967913ab90",
+              "name": "qux",
+              "service": {
+                "id": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda",
+                "name": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "89062cb9-e0c2-4b83-87b0-c84f2a377f55",
+                "argument": {
+                  "id": "26897691-de35-472c-ac2d-da7aadc2b8b6",
+                  "name": "bar"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "f98555ca-bddf-4e6c-9d84-a8640ff1f9fd",
+                  "name": "bar"
+                }
+              },
+              {
+                "id": "f5568f3b-37a2-4332-bbd0-fff7260bac92",
+                "argument": {
+                  "id": "0a9d9710-cec4-4e52-91dd-2f2834fb450b",
+                  "name": "baz"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "0850d45d-a37c-4138-bfea-9f98ef5ccb23",
+                  "name": "baz"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "QUERY",
+      "outputType": "STRING",
+      "outputKindId": null,
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kind": null,
+      "graph": {
+        "zoom": 100,
+        "offsetX": 0,
+        "offsetY": 0,
+        "nodes": [
+          {
+            "id": "f20b3255-deb0-4c56-b31c-a6874f51cc37INPUT",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "12ac88ce-c1dc-4e1a-956d-28b684de578dOUTPUT",
+            "x": 450,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "2e7f9c95-3184-45d1-b68a-ca3c907b0e0e",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": "a9a2a713-58c9-4618-b54c-5e1ab98f5c71"
+          }
+        ]
+      }
+    },
+    {
+      "id": "f885d013-14ce-4330-abe2-08d2c51db7dd",
+      "name": "foo",
+      "description": null,
+      "service": {
+        "id": "donald-simple",
+        "name": "Simple"
+      },
+      "arguments": [
+        {
+          "id": "c47a781c-4b04-4886-ae95-d90d5006a157",
+          "name": "fizz",
+          "type": "KIND",
+          "modifiers": [
+            "NONULL"
+          ],
+          "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
+          "kind": {
+            "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
+            "name": "Fizz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            }
+          }
+        }
+      ],
+      "implementation": {
+        "id": "b40ecf5c-cebe-48f2-95d5-98c48a74640e",
+        "entrypoint": {
+          "id": "e0d41c8b-6683-4d77-bd2f-4950635b00a8"
+        },
+        "operations": [
+          {
+            "id": "aa6b3db7-998f-4596-a3bc-454eec76b42c",
+            "type": "APPLY",
+            "function": {
+              "id": "271eba2f-4850-441c-b744-fd80c5932589",
+              "name": "bar",
+              "service": {
+                "id": "donald-simple",
+                "name": "Simple"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "05d7dc4d-ec9b-4f8d-b6fe-f79a17c80253",
+                "argument": {
+                  "id": "af204d08-99a3-47eb-bcd6-00cb1a9a6c64",
+                  "name": "dateTime"
+                },
+                "operation": {
+                  "id": "81afe2bb-d0eb-4fd4-8cc2-120a7f07c5be"
+                },
+                "argumentRef": null
+              }
+            ]
+          },
+          {
+            "id": "a6c5c146-bf26-4f50-8025-61b149cb9475",
+            "type": "APPLY",
+            "function": {
+              "id": "c1dd3789-fb9c-4bf8-a318-504e8868be6b",
+              "name": "baz",
+              "service": {
+                "id": "donald-simple",
+                "name": "Simple"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "0203f4f2-0961-427d-954f-215d9dd7a445",
+                "argument": {
+                  "id": "6c2f2b02-bd82-4a0b-9f34-4e5f463040e7",
+                  "name": "buzz"
+                },
+                "operation": {
+                  "id": "9898acbe-c831-427a-9b90-f72ff7d19a35"
+                },
+                "argumentRef": null
+              }
+            ]
+          },
+          {
+            "id": "e0d41c8b-6683-4d77-bd2f-4950635b00a8",
+            "type": "APPLY",
+            "function": {
+              "id": "dcc895b8-2610-4af4-bc9e-cf1d0c1f4c77",
+              "name": "qux",
+              "service": {
+                "id": "donald-simple",
+                "name": "Simple"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "d20abbdc-7378-49cd-aa1e-38eae469bf26",
+                "argument": {
+                  "id": "f98555ca-bddf-4e6c-9d84-a8640ff1f9fd",
+                  "name": "bar"
+                },
+                "operation": {
+                  "id": "aa6b3db7-998f-4596-a3bc-454eec76b42c"
+                },
+                "argumentRef": null
+              },
+              {
+                "id": "ed8a8ef8-3172-4cc1-ac39-e3ad3fe067a8",
+                "argument": {
+                  "id": "0850d45d-a37c-4138-bfea-9f98ef5ccb23",
+                  "name": "baz"
+                },
+                "operation": {
+                  "id": "a6c5c146-bf26-4f50-8025-61b149cb9475"
+                },
+                "argumentRef": null
+              }
+            ]
+          },
+          {
+            "id": "9898acbe-c831-427a-9b90-f72ff7d19a35",
+            "type": "APPLY",
+            "function": {
+              "id": "2d9c394c-614e-4876-8334-c35238657cc9_projector",
+              "name": "projectBuzzFromFizz",
+              "service": {
+                "id": "donald-simple",
+                "name": "Simple"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "5b4115d4-093c-4abc-827d-d62af582aada",
+                "argument": {
+                  "id": "b69063f3-d088-4650-84dd-a570a9600cef",
+                  "name": "fizz"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "c47a781c-4b04-4886-ae95-d90d5006a157",
+                  "name": "fizz"
+                }
+              }
+            ]
+          },
+          {
+            "id": "81afe2bb-d0eb-4fd4-8cc2-120a7f07c5be",
+            "type": "APPLY",
+            "function": {
+              "id": "a35d961a-9cab-43e7-a991-e4a2fc350294_projector",
+              "name": "projectCreatedOnFromFizz",
+              "service": {
+                "id": "donald-simple",
+                "name": "Simple"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "42832efa-3c85-4b1c-ac3c-9bfe0ddba0e6",
+                "argument": {
+                  "id": "23cfa4c7-aebd-45ad-b3cc-b2a4c6a90d9a",
+                  "name": "fizz"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "c47a781c-4b04-4886-ae95-d90d5006a157",
+                  "name": "fizz"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "QUERY",
+      "outputType": "STRING",
+      "outputKindId": null,
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kind": null,
+      "graph": {
+        "zoom": 100,
+        "offsetX": 0,
+        "offsetY": 0,
+        "nodes": [
+          {
+            "id": "1b246bce-b266-4423-82f8-d45518e8e6c7INPUT",
+            "x": 32,
+            "y": 96,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "c7d16309-b728-4777-9965-de818b121ca7OUTPUT",
+            "x": 928,
+            "y": 96,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "77416b81-e528-422c-b714-f2735f644b73",
+            "x": 512,
+            "y": 32,
+            "collapsed": false,
+            "operationId": "aa6b3db7-998f-4596-a3bc-454eec76b42c"
+          },
+          {
+            "id": "214d4319-f0fe-4940-9d6b-5ab473d9f15a",
+            "x": 512,
+            "y": 192,
+            "collapsed": false,
+            "operationId": "a6c5c146-bf26-4f50-8025-61b149cb9475"
+          },
+          {
+            "id": "cbc65c99-8ba7-487d-a17e-84af10a1cbb0",
+            "x": 736,
+            "y": 96,
+            "collapsed": false,
+            "operationId": "e0d41c8b-6683-4d77-bd2f-4950635b00a8"
+          },
+          {
+            "id": "e8f26786-6e04-4c0e-8c12-ec73c1773fe0",
+            "x": 256,
+            "y": 192,
+            "collapsed": false,
+            "operationId": "9898acbe-c831-427a-9b90-f72ff7d19a35"
+          },
+          {
+            "id": "a83346c4-049d-49f5-850a-59b983d5a0b0",
+            "x": 256,
+            "y": 32,
+            "collapsed": false,
+            "operationId": "81afe2bb-d0eb-4fd4-8cc2-120a7f07c5be"
+          }
+        ]
+      }
+    },
+    {
+      "id": "271eba2f-4850-441c-b744-fd80c5932589",
+      "name": "bar",
+      "description": null,
+      "service": {
+        "id": "donald-simple",
+        "name": "Simple"
+      },
+      "arguments": [
+        {
+          "id": "af204d08-99a3-47eb-bcd6-00cb1a9a6c64",
+          "name": "dateTime",
+          "type": "DATETIME",
+          "modifiers": [
+            "NONULL"
+          ],
+          "typeKindId": null,
+          "kind": null
+        }
+      ],
+      "implementation": {
+        "id": "3f2f5d26-ae04-46f5-9b7c-938df330fc9b",
+        "entrypoint": {
+          "id": "ac63270e-0ab0-4498-a58e-b26324d4621d"
+        },
+        "operations": [
+          {
+            "id": "ac63270e-0ab0-4498-a58e-b26324d4621d",
+            "type": "APPLY",
+            "function": {
+              "id": "062c71d5-1855-4d85-89a0-18956dbc9a02",
+              "name": "dateTimeToString",
+              "service": {
+                "id": "io.maana.scalars",
+                "name": "Maana Scalars"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "4c1c271c-bc04-4032-8577-d72706a87c97",
+                "argument": {
+                  "id": "49739a99-684d-4874-a09f-bb8c659bec41",
+                  "name": "x"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "af204d08-99a3-47eb-bcd6-00cb1a9a6c64",
+                  "name": "dateTime"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "QUERY",
+      "outputType": "STRING",
+      "outputKindId": null,
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kind": null,
+      "graph": {
+        "zoom": 100,
+        "offsetX": 0,
+        "offsetY": 0,
+        "nodes": [
+          {
+            "id": "6d1eeb32-2cdc-4c7f-80b6-31c3372bd105INPUT",
+            "x": 32,
+            "y": 32,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "198d45f7-0e7f-4957-b4d9-d3b63f66f197OUTPUT",
+            "x": 512,
+            "y": 32,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "819943ec-17e9-461a-97e5-a1d77cf7d582",
+            "x": 256,
+            "y": 32,
+            "collapsed": false,
+            "operationId": "ac63270e-0ab0-4498-a58e-b26324d4621d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2d9c394c-614e-4876-8334-c35238657cc9_projector",
+      "name": "projectBuzzFromFizz",
+      "description": null,
+      "service": {
+        "id": "donald-simple",
+        "name": "Simple"
+      },
+      "arguments": [
+        {
+          "id": "b69063f3-d088-4650-84dd-a570a9600cef",
+          "name": "fizz",
+          "type": "KIND",
+          "modifiers": [
+            "NONULL"
+          ],
+          "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
+          "kind": {
+            "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
+            "name": "Fizz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            }
+          }
+        }
+      ],
+      "implementation": {
+        "id": "48770928-8bfd-4a2d-98f5-99f8a1d653d6",
+        "entrypoint": {
+          "id": "b8e7f2ce-c580-480a-91c1-f6622ffd9e1b"
+        },
+        "operations": [
+          {
+            "id": "b8e7f2ce-c580-480a-91c1-f6622ffd9e1b",
+            "type": "APPLY",
+            "function": {
+              "id": "48dbc49e-980d-4644-a105-9f868efdc55e",
+              "name": "projectBuzzFromFizz",
+              "service": {
+                "id": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda",
+                "name": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "50005d18-6adb-4635-af07-c28c22d205a9",
+                "argument": {
+                  "id": "97a26f1b-6def-4aae-851e-3bde5f08a308",
+                  "name": "fizz"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "b69063f3-d088-4650-84dd-a570a9600cef",
+                  "name": "fizz"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "QUERY",
+      "outputType": "KIND",
+      "outputKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kind": {
+        "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+        "name": "Buzz",
+        "service": {
+          "id": "donald-simple",
+          "name": "Simple"
+        }
+      },
+      "graph": {
+        "zoom": 100,
+        "offsetX": 0,
+        "offsetY": 0,
+        "nodes": [
+          {
+            "id": "90baf660-3008-41b8-b30f-7ba925c38534INPUT",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "3c083eb6-3231-4c7c-901e-9f377b999436OUTPUT",
+            "x": 450,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "2a5e1859-2ce3-4bac-b4be-1a1ce7f52a8b",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": "b8e7f2ce-c580-480a-91c1-f6622ffd9e1b"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bfc15d43-df5a-42f1-923f-d3b2ec1e8dc1",
+      "name": "jsonToString",
+      "description": null,
+      "service": {
+        "id": "donald-simple",
+        "name": "Simple"
+      },
+      "arguments": [
+        {
+          "id": "68f5573a-e190-4786-9ee1-c65a019126d9",
+          "name": "json",
+          "type": "JSON",
+          "modifiers": [],
+          "typeKindId": null,
+          "kind": null
+        }
+      ],
+      "implementation": {
+        "id": "9a942b04-bb21-4aa1-b131-56bf25b27b03",
+        "entrypoint": {
+          "id": "af18f9f7-7aac-4c3e-b5e5-70bb2543b549"
+        },
+        "operations": [
+          {
+            "id": "af18f9f7-7aac-4c3e-b5e5-70bb2543b549",
+            "type": "APPLY",
+            "function": {
+              "id": "e0e568a0-282c-4a73-83f9-39492002fc9f",
+              "name": "jsonToString",
+              "service": {
+                "id": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda",
+                "name": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "a3fbddf9-1f59-4b0f-9ced-18e13e93557d",
+                "argument": {
+                  "id": "21e52e91-b6af-4157-8876-c3099b027c87",
+                  "name": "json"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "68f5573a-e190-4786-9ee1-c65a019126d9",
+                  "name": "json"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "QUERY",
+      "outputType": "STRING",
+      "outputKindId": null,
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kind": null,
+      "graph": {
+        "zoom": 100,
+        "offsetX": 0,
+        "offsetY": 0,
+        "nodes": [
+          {
+            "id": "936d88fc-2232-422b-91fa-b086d214e721INPUT",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "a128c779-4a16-44ae-be40-15fa299b5ae6OUTPUT",
+            "x": 450,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "5809d5eb-f62f-49ae-99e5-c3cbc9550487",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": "af18f9f7-7aac-4c3e-b5e5-70bb2543b549"
+          }
+        ]
+      }
+    },
+    {
+      "id": "a35d961a-9cab-43e7-a991-e4a2fc350294_projector",
+      "name": "projectCreatedOnFromFizz",
+      "description": null,
+      "service": {
+        "id": "donald-simple",
+        "name": "Simple"
+      },
+      "arguments": [
+        {
+          "id": "23cfa4c7-aebd-45ad-b3cc-b2a4c6a90d9a",
+          "name": "fizz",
+          "type": "KIND",
+          "modifiers": [
+            "NONULL"
+          ],
+          "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
+          "kind": {
+            "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
+            "name": "Fizz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            }
+          }
+        }
+      ],
+      "implementation": {
+        "id": "2a01352e-3787-4f05-b31e-05abbd0d8909",
+        "entrypoint": {
+          "id": "bd1ea3b9-eed2-4a02-8bf5-36bc74ae3855"
+        },
+        "operations": [
+          {
+            "id": "bd1ea3b9-eed2-4a02-8bf5-36bc74ae3855",
+            "type": "APPLY",
+            "function": {
+              "id": "a6029d08-8bfd-461e-8948-e986bbad9360",
+              "name": "projectCreatedOnFromFizz",
+              "service": {
+                "id": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda",
+                "name": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "b52a11a2-d7f2-4f0e-960b-37f9e2101748",
+                "argument": {
+                  "id": "803e9587-5c59-4cfe-9be6-045e052818ed",
+                  "name": "fizz"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "23cfa4c7-aebd-45ad-b3cc-b2a4c6a90d9a",
+                  "name": "fizz"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "QUERY",
+      "outputType": "DATETIME",
+      "outputKindId": null,
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kind": null,
+      "graph": {
+        "zoom": 100,
+        "offsetX": 0,
+        "offsetY": 0,
+        "nodes": [
+          {
+            "id": "a45e4c62-dc72-485e-9c2e-fe2ba02916e1INPUT",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "dc021060-af7c-4f51-ad46-79d2da6744d0OUTPUT",
+            "x": 450,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "71c1bc2a-1246-4c7e-b31c-e03ae4a7ba29",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": "bd1ea3b9-eed2-4a02-8bf5-36bc74ae3855"
+          }
+        ]
+      }
+    },
+    {
+      "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384_projector",
+      "name": "projectJsonFromBuzz",
+      "description": null,
+      "service": {
+        "id": "donald-simple",
+        "name": "Simple"
+      },
+      "arguments": [
+        {
+          "id": "33bb69ca-654f-49a7-a302-35b6a4dce57c",
+          "name": "buzz",
+          "type": "KIND",
+          "modifiers": [
+            "NONULL"
+          ],
+          "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+          "kind": {
+            "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+            "name": "Buzz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            }
+          }
+        }
+      ],
+      "implementation": {
+        "id": "f591db20-4130-4297-bb2b-4f89328b8739",
+        "entrypoint": {
+          "id": "a641ca7c-8523-4a8f-86ad-18e6d5a55a8f"
+        },
+        "operations": [
+          {
+            "id": "a641ca7c-8523-4a8f-86ad-18e6d5a55a8f",
+            "type": "APPLY",
+            "function": {
+              "id": "f152ce4d-59ef-4dea-8453-8ab93860251f",
+              "name": "projectJsonFromBuzz",
+              "service": {
+                "id": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda",
+                "name": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "b63925d8-caa3-4c84-95fa-ad76df8e0971",
+                "argument": {
+                  "id": "ca7de529-321c-4911-838b-c87493618c74",
+                  "name": "buzz"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "33bb69ca-654f-49a7-a302-35b6a4dce57c",
+                  "name": "buzz"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "QUERY",
+      "outputType": "JSON",
+      "outputKindId": null,
+      "outputModifiers": [],
+      "kind": null,
+      "graph": {
+        "zoom": 100,
+        "offsetX": 0,
+        "offsetY": 0,
+        "nodes": [
+          {
+            "id": "b33775c5-7bc8-4b47-8faf-878473b81b49INPUT",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "7cea39e8-926c-4b99-ad43-12fd7f470c8dOUTPUT",
+            "x": 450,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "f375fbbe-c0b6-47b6-895f-f0d29090eddd",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": "a641ca7c-8523-4a8f-86ad-18e6d5a55a8f"
+          }
+        ]
+      }
+    }
+  ],
+  "services": [
+    {
+      "id": "io.maana.scalars",
+      "name": "Maana Scalars"
+    }
+  ],
+  "assistants": [
+    {
+      "id": "io.maana.export-import-assistant",
+      "name": "Export Import Assistant"
+    },
+    {
+      "id": "io.maana.lambda-assistant",
+      "name": "Lambda Assistant"
+    },
+    {
+      "id": "7a9f6993-e4d2-4016-aa8a-2df6e1cc6147",
+      "name": "Workspace Dev Assistant - Beta"
+    }
+  ],
+  "lambda": [
+    {
+      "id": "271eba2f-4850-441c-b744-fd80c5932589",
+      "name": "bar",
+      "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
+      "runtime": {
+        "id": "Q+JavaScript"
+      },
+      "code": "return input.dateTime;",
+      "input": [
+        {
+          "name": "dateTime",
+          "kind": "DATETIME",
+          "modifiers": [
+            "NONULL"
+          ]
+        }
+      ],
+      "outputKind": "STRING",
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kinds": [],
+      "graphQLOperationType": "QUERY"
+    },
+    {
+      "id": "c1dd3789-fb9c-4bf8-a318-504e8868be6b",
+      "name": "baz",
+      "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
+      "runtime": {
+        "id": "Q+JavaScript"
+      },
+      "code": "return input.in;",
+      "input": [
+        {
+          "name": "buzz",
+          "kind": "BuzzInput",
+          "modifiers": [
+            "NONULL"
+          ]
+        }
+      ],
+      "outputKind": "STRING",
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kinds": [
+        {
+          "name": "BuzzInput",
+          "fields": [
+            {
+              "name": "id",
+              "kind": "ID",
+              "modifiers": [
+                "NONULL"
+              ]
+            },
+            {
+              "name": "json",
+              "kind": "JSON",
+              "modifiers": []
+            }
+          ]
+        }
+      ],
+      "graphQLOperationType": "MUTATION"
+    },
+    {
+      "id": "dcc895b8-2610-4af4-bc9e-cf1d0c1f4c77",
+      "name": "qux",
+      "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
+      "runtime": {
+        "id": "Q+JavaScript"
+      },
+      "code": "return `${input.bar}:${input.baz}`;",
+      "input": [
+        {
+          "name": "bar",
+          "kind": "STRING",
+          "modifiers": [
+            "NONULL"
+          ]
+        },
+        {
+          "name": "baz",
+          "kind": "STRING",
+          "modifiers": [
+            "NONULL"
+          ]
+        }
+      ],
+      "outputKind": "STRING",
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kinds": [],
+      "graphQLOperationType": "QUERY"
+    },
+    {
+      "id": "a35d961a-9cab-43e7-a991-e4a2fc350294_projector",
+      "name": "projectCreatedOnFromFizz",
+      "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
+      "runtime": {
+        "id": "Q+JavaScript"
+      },
+      "code": "const { fizz } = input;\nreturn fizz.createdOn",
+      "input": [
+        {
+          "name": "fizz",
+          "kind": "FizzInput",
+          "modifiers": [
+            "NONULL"
+          ]
+        }
+      ],
+      "outputKind": "DATETIME",
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kinds": [
+        {
+          "name": "FizzInput",
+          "fields": [
+            {
+              "name": "id",
+              "kind": "ID",
+              "modifiers": [
+                "NONULL"
+              ]
+            },
+            {
+              "name": "createdOn",
+              "kind": "DATETIME",
+              "modifiers": [
+                "NONULL"
+              ]
+            },
+            {
+              "name": "buzz",
+              "kind": "BuzzInput",
+              "modifiers": [
+                "NONULL"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "BuzzInput",
+          "fields": [
+            {
+              "name": "id",
+              "kind": "ID",
+              "modifiers": [
+                "NONULL"
+              ]
+            },
+            {
+              "name": "json",
+              "kind": "JSON",
+              "modifiers": []
+            }
+          ]
+        }
+      ],
+      "graphQLOperationType": "QUERY"
+    },
+    {
+      "id": "2d9c394c-614e-4876-8334-c35238657cc9_projector",
+      "name": "projectBuzzFromFizz",
+      "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
+      "runtime": {
+        "id": "Q+JavaScript"
+      },
+      "code": "const { fizz } = input;\nreturn fizz.buzz",
+      "input": [
+        {
+          "name": "fizz",
+          "kind": "FizzInput",
+          "modifiers": [
+            "NONULL"
+          ]
+        }
+      ],
+      "outputKind": "Buzz",
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kinds": [
+        {
+          "name": "FizzInput",
+          "fields": [
+            {
+              "name": "id",
+              "kind": "ID",
+              "modifiers": [
+                "NONULL"
+              ]
+            },
+            {
+              "name": "createdOn",
+              "kind": "DATETIME",
+              "modifiers": [
+                "NONULL"
+              ]
+            },
+            {
+              "name": "buzz",
+              "kind": "BuzzInput",
+              "modifiers": [
+                "NONULL"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "BuzzInput",
+          "fields": [
+            {
+              "name": "id",
+              "kind": "ID",
+              "modifiers": [
+                "NONULL"
+              ]
+            },
+            {
+              "name": "json",
+              "kind": "JSON",
+              "modifiers": []
+            }
+          ]
+        },
+        {
+          "name": "Buzz",
+          "fields": [
+            {
+              "name": "id",
+              "kind": "ID",
+              "modifiers": [
+                "NONULL"
+              ]
+            },
+            {
+              "name": "json",
+              "kind": "JSON",
+              "modifiers": []
+            }
+          ]
+        }
+      ],
+      "graphQLOperationType": "QUERY"
+    },
+    {
+      "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384_projector",
+      "name": "projectJsonFromBuzz",
+      "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
+      "runtime": {
+        "id": "Q+JavaScript"
+      },
+      "code": "const { buzz } = input;\nreturn buzz.json",
+      "input": [
+        {
+          "name": "buzz",
+          "kind": "BuzzInput",
+          "modifiers": [
+            "NONULL"
+          ]
+        }
+      ],
+      "outputKind": "JSON",
+      "outputModifiers": [],
+      "kinds": [
+        {
+          "name": "BuzzInput",
+          "fields": [
+            {
+              "name": "id",
+              "kind": "ID",
+              "modifiers": [
+                "NONULL"
+              ]
+            },
+            {
+              "name": "json",
+              "kind": "JSON",
+              "modifiers": []
+            }
+          ]
+        }
+      ],
+      "graphQLOperationType": "QUERY"
+    },
+    {
+      "id": "bfc15d43-df5a-42f1-923f-d3b2ec1e8dc1",
+      "name": "jsonToString",
+      "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
+      "runtime": {
+        "id": "Q+JavaScript"
+      },
+      "code": "return JSON.stringify(input.json) || \"\"",
+      "input": [
+        {
+          "name": "json",
+          "kind": "JSON",
+          "modifiers": []
+        }
+      ],
+      "outputKind": "STRING",
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kinds": [],
+      "graphQLOperationType": "QUERY"
+    }
+  ],
+  "endpointServiceId": "donald-simple",
+  "currentSelection": {
+    "id": "c1dd3789-fb9c-4bf8-a318-504e8868be6b",
+    "kindId": null,
+    "kindName": "Function"
+  },
+  "knowledgeGraphs": [
+    {
+      "id": "84636eb1-6248-4483-94af-95dfbf49f75f",
+      "name": "New Knowledge Graph",
+      "offsetX": 161,
+      "offsetY": 26,
+      "zoom": 100,
+      "nodes": [
+        {
+          "id": "635ed972-2361-4152-907c-0dfbf7dacab5",
+          "x": -96,
+          "y": 0,
+          "collapsed": false,
+          "function": {
+            "id": "f885d013-14ce-4330-abe2-08d2c51db7dd",
+            "name": "foo",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "519304c1-45a1-4180-ad7f-4ffff0d54bb0",
+          "x": 189.77,
+          "y": 10,
+          "collapsed": false,
+          "function": {
+            "id": "271eba2f-4850-441c-b744-fd80c5932589",
+            "name": "bar",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "532827b9-ecb3-4db7-bccc-564f8a7114d5",
+          "x": 416,
+          "y": 0,
+          "collapsed": false,
+          "function": {
+            "id": "c1dd3789-fb9c-4bf8-a318-504e8868be6b",
+            "name": "baz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "13018815-96dd-4f7e-9019-40bc6151c149",
+          "x": -64,
+          "y": 160,
+          "collapsed": false,
+          "function": {
+            "id": "dcc895b8-2610-4af4-bc9e-cf1d0c1f4c77",
+            "name": "qux",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "6df4ac55-0da3-443e-a134-c9473ec4f2f5",
+          "x": 416,
+          "y": 160,
+          "collapsed": false,
+          "kind": {
+            "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
+            "name": "Fizz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "c12c0e9f-5b4b-4c86-9a4d-992e0f71519c",
+          "x": 640,
+          "y": 160,
+          "collapsed": false,
+          "kind": {
+            "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+            "name": "Buzz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "ab6b3008-fee8-494f-8d72-ba74e16a7a6d",
+          "x": 160,
+          "y": 288,
+          "collapsed": false,
+          "function": {
+            "id": "a35d961a-9cab-43e7-a991-e4a2fc350294_projector",
+            "name": "projectCreatedOnFromFizz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "d236d54a-e478-45ad-8fcf-aed3cf1aa6ef",
+          "x": 192,
+          "y": 160,
+          "collapsed": false,
+          "function": {
+            "id": "2d9c394c-614e-4876-8334-c35238657cc9_projector",
+            "name": "projectBuzzFromFizz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "d765f57d-0236-4616-a04c-62156f8b891c",
+          "x": 416,
+          "y": 320,
+          "collapsed": false,
+          "function": {
+            "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384_projector",
+            "name": "projectJsonFromBuzz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            },
+            "isGenerated": false
+          }
+        }
+      ]
+    }
+  ],
+  "boilerplate": {
+    "kinds": [
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:addinput",
+        "name": "AddBuzzInput"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:updateinput",
+        "name": "UpdateBuzzInput"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:addinput",
+        "name": "AddFizzInput"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:updateinput",
+        "name": "UpdateFizzInput"
+      }
+    ],
+    "functions": [
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:queryOne",
+        "name": "buzz"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:queryMany",
+        "name": "buzzs"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:queryAll",
+        "name": "allBuzzs"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:filter",
+        "name": "buzzFilter"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:addOne",
+        "name": "addBuzz"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:addMany",
+        "name": "addBuzzs"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:updateOne",
+        "name": "updateBuzz"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:updateMany",
+        "name": "updateBuzzs"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:deleteOne",
+        "name": "deleteBuzz"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:241f99f5-00f6-4ec3-a541-96e5b8013263:deleteMany",
+        "name": "deleteBuzzs"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:queryOne",
+        "name": "fizz"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:queryMany",
+        "name": "fizzs"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:queryAll",
+        "name": "allFizzs"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:filter",
+        "name": "fizzFilter"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:addOne",
+        "name": "addFizz"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:addMany",
+        "name": "addFizzs"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:updateOne",
+        "name": "updateFizz"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:updateMany",
+        "name": "updateFizzs"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:deleteOne",
+        "name": "deleteFizz"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:deleteMany",
+        "name": "deleteFizzs"
+      }
+    ]
+  }
+}
