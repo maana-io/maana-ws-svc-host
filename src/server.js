@@ -13,16 +13,18 @@ import {
 import { ApolloServer } from 'apollo-server-express'
 import cors from 'cors'
 import express from 'express'
+import bodyParser from 'body-parser'
 import http from 'http'
 import querystring from 'querystring'
 import request from 'request-promise-native'
-import { createSchema } from './schema.js'
+import { createHost, getSchema } from './host.js'
 import ws from '../data/simple.json'
 
 // load .env into process.env.*
 require('dotenv').config()
 
-export const schema = createSchema(ws)
+const host = createHost(ws)
+export const schema = getSchema(host)
 
 //
 // Client setup
@@ -75,6 +77,24 @@ const corsOptions = {
 app.use(cors(corsOptions)) // enable all CORS requests
 app.options('*', cors()) // enable pre-flight for all routes
 
+const requestTimeout = 1200000 // 20 minutes
+app.use((req, res, next) => {
+  res.setTimeout(requestTimeout, () => {
+    res.status(408)
+    res.send('408: Request Timeout: Service aborted your connection')
+  })
+  next()
+})
+
+app.use(bodyParser.json({ limit: '50mb', extended: true }))
+app.use(
+  bodyParser.urlencoded({
+    parameterLimit: 100000,
+    limit: '50mb',
+    extended: true,
+  })
+)
+
 app.get('/', (req, res) => {
   res.send(`${SELF}\n`)
 })
@@ -122,17 +142,17 @@ const initServer = async (options) => {
 
     // Create OIDC token URL for the specified auth provider (default to auth0).
     let token
-    if (process.env.REACT_APP_PORTAL_AUTH_DOMAIN) {
+    if (process.env.AUTH_DOMAIN) {
       const tokenUri =
-        process.env.REACT_APP_PORTAL_AUTH_PROVIDER === 'keycloak'
-          ? `${process.env.REACT_APP_PORTAL_AUTH_DOMAIN}/auth/realms/${process.env.REACT_APP_PORTAL_AUTH_IDENTIFIER}/protocol/openid-connect/token`
-          : `https://${process.env.REACT_APP_PORTAL_AUTH_DOMAIN}/oauth/token`
+        process.env.AUTH_PROVIDER === 'keycloak'
+          ? `${process.env.AUTH_DOMAIN}/auth/realms/${process.env.AUTH_IDENTIFIER}/protocol/openid-connect/token`
+          : `https://${process.env.AUTH_DOMAIN}/oauth/token`
 
       const form = {
         grant_type: 'client_credentials',
-        client_id: process.env.REACT_APP_PORTAL_AUTH_CLIENT_ID,
-        client_secret: process.env.REACT_APP_PORTAL_AUTH_CLIENT_SECRET,
-        audience: process.env.REACT_APP_PORTAL_AUTH_IDENTIFIER,
+        client_id: process.env.AUTH_CLIENT_ID,
+        client_secret: process.env.AUTH_CLIENT_SECRET,
+        audience: process.env.AUTH_IDENTIFIER,
       }
       const formData = querystring.stringify(form)
       const contentLength = formData.length

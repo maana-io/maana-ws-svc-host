@@ -85,104 +85,6 @@
   ],
   "functions": [
     {
-      "id": "c1dd3789-fb9c-4bf8-a318-504e8868be6b",
-      "name": "baz",
-      "description": null,
-      "service": {
-        "id": "donald-simple",
-        "name": "Simple"
-      },
-      "arguments": [
-        {
-          "id": "6c2f2b02-bd82-4a0b-9f34-4e5f463040e7",
-          "name": "buzz",
-          "type": "KIND",
-          "modifiers": [
-            "NONULL"
-          ],
-          "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
-          "kind": {
-            "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
-            "name": "Buzz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            }
-          }
-        }
-      ],
-      "implementation": {
-        "id": "5b26e2ee-403f-47ad-ba17-ab04e1bc8293",
-        "entrypoint": {
-          "id": "3e6ee2f9-b4bc-44df-a497-97e25ec3a587"
-        },
-        "operations": [
-          {
-            "id": "3e6ee2f9-b4bc-44df-a497-97e25ec3a587",
-            "type": "APPLY",
-            "function": {
-              "id": "fc95dee5-1193-4328-9fc9-7276b6d17b14",
-              "name": "baz",
-              "service": {
-                "id": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda",
-                "name": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda"
-              }
-            },
-            "argumentValues": [
-              {
-                "id": "3f38f6fc-9b6a-4b56-982d-dea7e3e0801e",
-                "argument": {
-                  "id": "57123197-8067-45fe-9ab3-f61c016e5620",
-                  "name": "buzz"
-                },
-                "operation": null,
-                "argumentRef": {
-                  "id": "6c2f2b02-bd82-4a0b-9f34-4e5f463040e7",
-                  "name": "buzz"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "functionType": "CKG",
-      "graphqlOperationType": "MUTATION",
-      "outputType": "STRING",
-      "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
-      "kind": null,
-      "graph": {
-        "zoom": 100,
-        "offsetX": -20,
-        "offsetY": -4,
-        "nodes": [
-          {
-            "id": "6184f4bc-7e8b-4fd8-b5d4-423a8fe149cdINPUT",
-            "x": 32,
-            "y": 32,
-            "collapsed": false,
-            "operationId": null
-          },
-          {
-            "id": "d59a36e8-44cc-41d4-ac14-fcfb1ba6d22dOUTPUT",
-            "x": 1088,
-            "y": 32,
-            "collapsed": false,
-            "operationId": null
-          },
-          {
-            "id": "8b100e48-f8d3-4532-83eb-acb6af08284f",
-            "x": 25,
-            "y": 25,
-            "collapsed": false,
-            "operationId": "3e6ee2f9-b4bc-44df-a497-97e25ec3a587"
-          }
-        ]
-      }
-    },
-    {
       "id": "dcc895b8-2610-4af4-bc9e-cf1d0c1f4c77",
       "name": "qux",
       "description": null,
@@ -354,31 +256,6 @@
             ]
           },
           {
-            "id": "a6c5c146-bf26-4f50-8025-61b149cb9475",
-            "type": "APPLY",
-            "function": {
-              "id": "c1dd3789-fb9c-4bf8-a318-504e8868be6b",
-              "name": "baz",
-              "service": {
-                "id": "donald-simple",
-                "name": "Simple"
-              }
-            },
-            "argumentValues": [
-              {
-                "id": "0203f4f2-0961-427d-954f-215d9dd7a445",
-                "argument": {
-                  "id": "6c2f2b02-bd82-4a0b-9f34-4e5f463040e7",
-                  "name": "buzz"
-                },
-                "operation": {
-                  "id": "9898acbe-c831-427a-9b90-f72ff7d19a35"
-                },
-                "argumentRef": null
-              }
-            ]
-          },
-          {
             "id": "e0d41c8b-6683-4d77-bd2f-4950635b00a8",
             "type": "APPLY",
             "function": {
@@ -398,17 +275,6 @@
                 },
                 "operation": {
                   "id": "aa6b3db7-998f-4596-a3bc-454eec76b42c"
-                },
-                "argumentRef": null
-              },
-              {
-                "id": "ed8a8ef8-3172-4cc1-ac39-e3ad3fe067a8",
-                "argument": {
-                  "id": "0850d45d-a37c-4138-bfea-9f98ef5ccb23",
-                  "name": "baz"
-                },
-                "operation": {
-                  "id": "a6c5c146-bf26-4f50-8025-61b149cb9475"
                 },
                 "argumentRef": null
               }
@@ -478,8 +344,8 @@
       "kind": null,
       "graph": {
         "zoom": 100,
-        "offsetX": 0,
-        "offsetY": 0,
+        "offsetX": -129,
+        "offsetY": -10,
         "nodes": [
           {
             "id": "1b246bce-b266-4423-82f8-d45518e8e6c7INPUT",
@@ -501,13 +367,6 @@
             "y": 32,
             "collapsed": false,
             "operationId": "aa6b3db7-998f-4596-a3bc-454eec76b42c"
-          },
-          {
-            "id": "214d4319-f0fe-4940-9d6b-5ab473d9f15a",
-            "x": 512,
-            "y": 192,
-            "collapsed": false,
-            "operationId": "a6c5c146-bf26-4f50-8025-61b149cb9475"
           },
           {
             "id": "cbc65c99-8ba7-487d-a17e-84af10a1cbb0",
@@ -819,6 +678,243 @@
       }
     },
     {
+      "id": "5276ddea-26b7-4686-bd5b-c310564cdd63",
+      "name": "bazz",
+      "description": null,
+      "service": {
+        "id": "donald-simple",
+        "name": "Simple"
+      },
+      "arguments": [
+        {
+          "id": "d93689cb-5665-47ef-94ff-f447c373ae3a",
+          "name": "buzz",
+          "type": "KIND",
+          "modifiers": [
+            "NONULL"
+          ],
+          "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+          "kind": {
+            "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+            "name": "Buzz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            }
+          }
+        }
+      ],
+      "implementation": {
+        "id": "b02d8a01-7b32-4602-b542-0117ffc7c081",
+        "entrypoint": {
+          "id": "93ccd68b-5983-478b-9586-716d19f1ae02"
+        },
+        "operations": [
+          {
+            "id": "caf8a712-fb82-4e25-aa2f-64a55516fada",
+            "type": "APPLY",
+            "function": {
+              "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384_projector",
+              "name": "projectJsonFromBuzz",
+              "service": {
+                "id": "donald-simple",
+                "name": "Simple"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "6822308f-696c-448b-90b1-9d3b9adaf1ef",
+                "argument": {
+                  "id": "33bb69ca-654f-49a7-a302-35b6a4dce57c",
+                  "name": "buzz"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "d93689cb-5665-47ef-94ff-f447c373ae3a",
+                  "name": "buzz"
+                }
+              }
+            ]
+          },
+          {
+            "id": "5091ef07-9045-4066-b4e8-457658723261",
+            "type": "APPLY",
+            "function": {
+              "id": "bfc15d43-df5a-42f1-923f-d3b2ec1e8dc1",
+              "name": "jsonToString",
+              "service": {
+                "id": "donald-simple",
+                "name": "Simple"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "be498490-aabb-4302-977f-aef385db3d4b",
+                "argument": {
+                  "id": "68f5573a-e190-4786-9ee1-c65a019126d9",
+                  "name": "json"
+                },
+                "operation": {
+                  "id": "caf8a712-fb82-4e25-aa2f-64a55516fada"
+                },
+                "argumentRef": null
+              }
+            ]
+          },
+          {
+            "id": "679f060b-76cf-4607-b61a-27fc86339c61",
+            "type": "APPLY",
+            "function": {
+              "id": "3ae44a87-0bb7-42b1-ab6a-659d28dfbcdf",
+              "name": "jsonToString",
+              "service": {
+                "id": "io.maana.scalars",
+                "name": "Maana Scalars"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "c0b66991-a883-4034-a813-2b7641bcc0dd",
+                "argument": {
+                  "id": "4b39bcae-b3d5-4c0c-833b-168f3fe370c6",
+                  "name": "x"
+                },
+                "operation": {
+                  "id": "6cb59261-dd73-4779-8f52-3c0e43171d5c"
+                },
+                "argumentRef": null
+              }
+            ]
+          },
+          {
+            "id": "6cb59261-dd73-4779-8f52-3c0e43171d5c",
+            "type": "APPLY",
+            "function": {
+              "id": "4142d727-ae2b-4ea2-a753-541c9523beeb",
+              "name": "jsonCoerceFromOpt",
+              "service": {
+                "id": "io.maana.scalars",
+                "name": "Maana Scalars"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "7a56bfc5-d512-4d54-9e41-05f59a7176de",
+                "argument": {
+                  "id": "4fc96a53-9ffd-4f8b-8b90-444578ba12c6",
+                  "name": "x"
+                },
+                "operation": {
+                  "id": "caf8a712-fb82-4e25-aa2f-64a55516fada"
+                },
+                "argumentRef": null
+              }
+            ]
+          },
+          {
+            "id": "93ccd68b-5983-478b-9586-716d19f1ae02",
+            "type": "APPLY",
+            "function": {
+              "id": "11202148-f939-4c08-8535-ca1e0da453b3",
+              "name": "stringConcat",
+              "service": {
+                "id": "io.maana.scalars",
+                "name": "Maana Scalars"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "03ae9925-078c-4b81-9586-de157e4b4f59",
+                "argument": {
+                  "id": "a0069902-d8b2-4499-8f20-ae488e12fe9a",
+                  "name": "b"
+                },
+                "operation": {
+                  "id": "679f060b-76cf-4607-b61a-27fc86339c61"
+                },
+                "argumentRef": null
+              },
+              {
+                "id": "181e7e4c-e432-4c5a-98db-4bf739323c93",
+                "argument": {
+                  "id": "f4d3e3e3-e490-49b4-b0a1-eb8d5ddca662",
+                  "name": "a"
+                },
+                "operation": {
+                  "id": "5091ef07-9045-4066-b4e8-457658723261"
+                },
+                "argumentRef": null
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "MUTATION",
+      "outputType": "STRING",
+      "outputKindId": null,
+      "outputModifiers": [
+        "NONULL"
+      ],
+      "kind": null,
+      "graph": {
+        "zoom": 100,
+        "offsetX": 0,
+        "offsetY": 0,
+        "nodes": [
+          {
+            "id": "97562262-9a8a-404f-85e0-f6a9881cad82INPUT",
+            "x": -32,
+            "y": 32,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "706c2d26-8079-4ab6-b704-8da953d1cf1dOUTPUT",
+            "x": 1056,
+            "y": 32,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "d8ab78ba-7a06-4188-b9c3-24b9bd2fec82",
+            "x": 160,
+            "y": 32,
+            "collapsed": false,
+            "operationId": "caf8a712-fb82-4e25-aa2f-64a55516fada"
+          },
+          {
+            "id": "a84c2e8a-f43b-4403-9bc2-a47f2a362db7",
+            "x": 352,
+            "y": 32,
+            "collapsed": false,
+            "operationId": "5091ef07-9045-4066-b4e8-457658723261"
+          },
+          {
+            "id": "756c915f-a4d1-4800-ac10-aa7db7006204",
+            "x": 608,
+            "y": 160,
+            "collapsed": false,
+            "operationId": "679f060b-76cf-4607-b61a-27fc86339c61"
+          },
+          {
+            "id": "18b77676-6cb9-4e54-a3a3-0e342434436f",
+            "x": 352,
+            "y": 160,
+            "collapsed": false,
+            "operationId": "6cb59261-dd73-4779-8f52-3c0e43171d5c"
+          },
+          {
+            "id": "98373eb3-42ca-44ae-92c7-45505f7e7a40",
+            "x": 832,
+            "y": 32,
+            "collapsed": false,
+            "operationId": "93ccd68b-5983-478b-9586-716d19f1ae02"
+          }
+        ]
+      }
+    },
+    {
       "id": "a35d961a-9cab-43e7-a991-e4a2fc350294_projector",
       "name": "projectCreatedOnFromFizz",
       "description": null,
@@ -1016,7 +1112,8 @@
   "services": [
     {
       "id": "io.maana.scalars",
-      "name": "Maana Scalars"
+      "name": "Maana Scalars",
+      "endpointUrl": "http://40.69.154.190:8050/graphql"
     }
   ],
   "assistants": [
@@ -1057,48 +1154,6 @@
       ],
       "kinds": [],
       "graphQLOperationType": "QUERY"
-    },
-    {
-      "id": "c1dd3789-fb9c-4bf8-a318-504e8868be6b",
-      "name": "baz",
-      "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
-      "runtime": {
-        "id": "Q+JavaScript"
-      },
-      "code": "return input.in;",
-      "input": [
-        {
-          "name": "buzz",
-          "kind": "BuzzInput",
-          "modifiers": [
-            "NONULL"
-          ]
-        }
-      ],
-      "outputKind": "STRING",
-      "outputModifiers": [
-        "NONULL"
-      ],
-      "kinds": [
-        {
-          "name": "BuzzInput",
-          "fields": [
-            {
-              "name": "id",
-              "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
-            },
-            {
-              "name": "json",
-              "kind": "JSON",
-              "modifiers": []
-            }
-          ]
-        }
-      ],
-      "graphQLOperationType": "MUTATION"
     },
     {
       "id": "dcc895b8-2610-4af4-bc9e-cf1d0c1f4c77",
@@ -1349,9 +1404,9 @@
   ],
   "endpointServiceId": "donald-simple",
   "currentSelection": {
-    "id": "c1dd3789-fb9c-4bf8-a318-504e8868be6b",
-    "kindId": null,
-    "kindName": "Function"
+    "kindName": "Function",
+    "id": "5276ddea-26b7-4686-bd5b-c310564cdd63",
+    "kindId": "8295d658-8b05-4f5e-b944-14ddfaf068b9"
   },
   "knowledgeGraphs": [
     {
@@ -1363,8 +1418,8 @@
       "nodes": [
         {
           "id": "635ed972-2361-4152-907c-0dfbf7dacab5",
-          "x": -96,
-          "y": 0,
+          "x": -64,
+          "y": 32,
           "collapsed": false,
           "function": {
             "id": "f885d013-14ce-4330-abe2-08d2c51db7dd",
@@ -1378,27 +1433,12 @@
         },
         {
           "id": "519304c1-45a1-4180-ad7f-4ffff0d54bb0",
-          "x": 189.77,
-          "y": 10,
+          "x": 192,
+          "y": 32,
           "collapsed": false,
           "function": {
             "id": "271eba2f-4850-441c-b744-fd80c5932589",
             "name": "bar",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            },
-            "isGenerated": false
-          }
-        },
-        {
-          "id": "532827b9-ecb3-4db7-bccc-564f8a7114d5",
-          "x": 416,
-          "y": 0,
-          "collapsed": false,
-          "function": {
-            "id": "c1dd3789-fb9c-4bf8-a318-504e8868be6b",
-            "name": "baz",
             "service": {
               "id": "donald-simple",
               "name": "Simple"
@@ -1489,6 +1529,21 @@
           "function": {
             "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384_projector",
             "name": "projectJsonFromBuzz",
+            "service": {
+              "id": "donald-simple",
+              "name": "Simple"
+            },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "a3f0d480-9300-4a92-89e4-2817b72e800c",
+          "x": 416,
+          "y": 32,
+          "collapsed": false,
+          "function": {
+            "id": "5276ddea-26b7-4686-bd5b-c310564cdd63",
+            "name": "bazz",
             "service": {
               "id": "donald-simple",
               "name": "Simple"
