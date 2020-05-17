@@ -20,9 +20,16 @@ const {
 } = require('graphql-iso-date')
 const { GraphQLJSON } = require('graphql-type-json')
 
+// --- Constants
+
 const SELF = process.env.SERVICE_ID || 'maana-ws-svc-host'
 
-const scalars = {
+const RootTypeEnum = {
+  Query: 'RootQuery',
+  Mutation: 'RootMutation',
+}
+
+const ScalarEnum = {
   BOOLEAN: GraphQLBoolean,
   FLOAT: GraphQLFloat,
   ID: GraphQLID,
@@ -43,7 +50,7 @@ const compose = (...funcs) => (initialArg) =>
 
 // ---
 
-const preprocessServices = (state) => ({
+const indexServices = (state) => ({
   ...state,
   svcIndex: state.ws.services.reduce((acc, cur) => {
     acc[cur.id] = cur
@@ -51,7 +58,7 @@ const preprocessServices = (state) => ({
   }, {}),
 })
 
-const preprocessKinds = (state) => ({
+const indexKinds = (state) => ({
   ...state,
   kindIndex: state.ws.kinds.reduce((acc, cur) => {
     acc[cur.id] = cur
@@ -59,20 +66,20 @@ const preprocessKinds = (state) => ({
   }, {}),
 })
 
-const preprocessFunctions = (state) => ({
+const indexFunctions = (state) => ({
   ...state,
   fnIndex: state.ws.functions.reduce((acc, cur) => {
     acc[cur.id] = cur
     return acc
   }, {}),
   lambdaIndex: state.ws.lambda.reduce((acc, cur) => {
-    acc[cur.id] = cur
+    acc[cur.name] = cur
     return acc
   }, {}),
 })
 
-const preprocessWorkspace = (state) =>
-  compose(preprocessServices, preprocessKinds, preprocessFunctions)(state)
+const indexWorkspace = (state) =>
+  compose(indexServices, indexKinds, indexFunctions)(state)
 
 // ---
 
@@ -107,7 +114,7 @@ const kindToGraphQLObject = (state, kind, isInput) => {
 const kindToGraphQLType = (state, type, kindId, modifiers, isInput) => {
   let base
   if (type !== 'KIND') {
-    base = scalars[type]
+    base = ScalarEnum[type]
     if (!base) throw new Error(`Unknown scalar: ${type}`)
   } else if (kindId) {
     const kind = state.kindIndex[kindId]
@@ -181,7 +188,7 @@ const buildSchema = (state) => {
         )
       }
     } else {
-      console.log(`[WARN] fn.functionType !== 'CKG': ${fn.functionType}`)
+      throw new Error(`Unknown functionType: ${fn.functionType}`)
     }
   })
 
@@ -190,7 +197,7 @@ const buildSchema = (state) => {
   }
 
   const query = new GraphQLObjectType({
-    name: 'RootQuery',
+    name: RootTypeEnum.Query,
     fields: queries,
   })
 
@@ -201,7 +208,7 @@ const buildSchema = (state) => {
   }
 
   const mutation = new GraphQLObjectType({
-    name: 'RootMutation',
+    name: RootTypeEnum.Mutation,
     fields: mutations,
   })
 
@@ -212,33 +219,64 @@ const buildSchema = (state) => {
   return state
 }
 
-const resolveFunctionGraph = (fn, root, args, context) => {
+// --- Resolvers
+
+const resolveFnGraph = async (state, fn, root, args, context) => {
   console.log(
-    `Resolver for ${fn.name} called with: root = ${JSON.stringify(
+    `FG resolver for ${fn.name} called with: root = ${JSON.stringify(
       root
     )}, args = ${JSON.stringify(args)}, ctx = ${JSON.stringify(context)}`
   )
 }
 
-// const resolveLambda = (lambda, execContext) => {}
-// const resolveRemoteFynction = (fn, execContext) => {}
-
-const buildResolver = (fn) => {
+const resolveLambda = async (state, lambda, root, args, context) => {
   console.log(
-    'fn',
-    fn.name,
-    JSON.stringify(fn.implementation.operations, null, 2)
+    `Lambda resolver for ${lambda.name} called with: root = ${JSON.stringify(
+      root
+    )}, args = ${JSON.stringify(args)}, ctx = ${JSON.stringify(context)}`
   )
-  const resolver = (root, args, context) =>
-    resolveFunctionGraph(fn, root, args, context)
-  return resolver
+}
+
+const resolveRemoteFn = async (state, fn, root, args, context) => {
+  console.log(
+    `Remote resolver for ${fn.name} called with: root = ${JSON.stringify(
+      root
+    )}, args = ${JSON.stringify(args)}, ctx = ${JSON.stringify(context)}`
+  )
+}
+
+// ---
+
+const buildResolver = (state, fn) => {
+  const ops = fn.implementation.operations
+  if (ops.length > 1) {
+    log(SELF).info(`⟶  ${fn.name}: [${ops.map((x) => x.function.name)}]`)
+    return (root, args, context) =>
+      resolveFnGraph(state, fn, root, args, context)
+  }
+  const op = ops[0]
+  if (op.function.service.id === state.lambdaServiceId) {
+    log(SELF).info(`⟶  ${fn.name}: ${state.lambdaIndex[fn.name].runtime.id}`)
+    return (root, args, context) =>
+      resolveLambda(state, fn, root, args, context)
+  }
+  const remoteSvc = state.svcIndex[op.function.service.id]
+  if (remoteSvc) {
+    log(SELF).info(
+      `⟶  ${fn.name}: ${op.function.service.id}/${op.function.name} @ ${remoteSvc.endpointUrl}`
+    )
+    return (root, args, context) =>
+      resolveRemoteFn(state, fn, root, args, context)
+  }
+  console.log('unknown ->', fn.name, JSON.stringify(fn, null, 2))
+  throw new Error(`Unknown function type: ${fn.name}`)
 }
 
 const buildResolvers = (state) => {
   log(SELF).info(`Building resolvers for ${state.serviceId}`)
 
   const resolvers = {
-    RootQuery: {
+    [RootTypeEnum.Query]: {
       info() {
         return {
           id: state.serviceId,
@@ -248,13 +286,15 @@ const buildResolvers = (state) => {
         }
       },
     },
-    RootMutation: {},
+    [RootTypeEnum.Mutation]: {},
   }
 
   state.ws.functions.reduce((acc, cur) => {
-    acc[cur.graphqlOperationType === 'QUERY' ? 'RootQuery' : 'RootMutation'][
-      cur.name
-    ] = buildResolver(cur)
+    acc[
+      cur.graphqlOperationType === 'QUERY'
+        ? RootTypeEnum.Query
+        : RootTypeEnum.Mutation
+    ][cur.name] = buildResolver(state, cur)
     return acc
   }, resolvers)
 
@@ -268,12 +308,12 @@ export const createHost = (ws) => {
   let state = {
     ws,
     serviceId: ws.endpointServiceId,
-    lambdaServiceId: `${ws.endpointServiceId}_lambda`,
+    lambdaServiceId: `${ws.id}_lambda`,
     inputKinds: {},
     outputKinds: {},
   }
 
-  state = compose(preprocessWorkspace, buildSchema, buildResolvers)(state)
+  state = compose(indexWorkspace, buildSchema, buildResolvers)(state)
 
   state.schema = addResolversToSchema({
     schema: state.schemaOnly,
