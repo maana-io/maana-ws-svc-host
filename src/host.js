@@ -1,7 +1,6 @@
-import { log } from 'io.maana.shared'
-
+// --- Exdternal imports
 import { addResolversToSchema } from 'graphql-tools'
-const {
+import {
   GraphQLBoolean,
   GraphQLString,
   GraphQLInt,
@@ -12,17 +11,19 @@ const {
   GraphQLNonNull,
   GraphQLSchema,
   GraphQLID,
-} = require('graphql')
-const {
-  GraphQLDate,
-  GraphQLDateTime,
-  GraphQLTime,
-} = require('graphql-iso-date')
-const { GraphQLJSON } = require('graphql-type-json')
+} from 'graphql'
+import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date'
+import { GraphQLJSON } from 'graphql-type-json'
+
+// --- Internal imports
+import { log } from './utils.js'
+import runJavaScript from './runJavascript.js'
 
 // --- Constants
 
-const SELF = process.env.SERVICE_ID || 'maana-ws-svc-host'
+const SupportedLambdas = {
+  QJavaScript: 'Q+JavaScript',
+}
 
 const RootTypeEnum = {
   Query: 'RootQuery',
@@ -159,7 +160,7 @@ const fnToGraphQLField = (state, fn) => {
 // ---
 
 const buildSchema = (state) => {
-  log(SELF).info(`Building schema for ${state.serviceId}`)
+  log.info(`🚧 Building schema for ${state.serviceId}`)
 
   const queries = {
     info: {
@@ -221,7 +222,7 @@ const buildSchema = (state) => {
 
 // --- Resolvers
 
-const resolveFnGraph = async (state, fn, root, args, context) => {
+const runFnGraph = async (state, fn, root, args, context) => {
   console.log(
     `FG resolver for ${fn.name} called with: root = ${JSON.stringify(
       root
@@ -229,15 +230,20 @@ const resolveFnGraph = async (state, fn, root, args, context) => {
   )
 }
 
-const resolveLambda = async (state, lambda, root, args, context) => {
-  console.log(
-    `Lambda resolver for ${lambda.name} called with: root = ${JSON.stringify(
-      root
-    )}, args = ${JSON.stringify(args)}, ctx = ${JSON.stringify(context)}`
-  )
+const runLambda = async (state, lambda, root, args, context) => {
+  if (lambda.runtime.id !== SupportedLambdas.QJavaScript)
+    throw new Error(`Unsupported Lambda runtime: ${lambda.runtime.id}`)
+
+  log.info(`⚡ Lambda: ${lambda.name}, runtime: ${lambda.runtime.id}`)
+  const startTime = new Date()
+  const result = await runJavaScript({ input: args, lambda, context })
+  const endTime = new Date()
+  const elapsedTime = (endTime.getTime() - startTime.getTime()) / 1000
+  log.info(`⏲️  Lambda: ${lambda.name} took ${elapsedTime} seconds`)
+  return result
 }
 
-const resolveRemoteFn = async (state, fn, root, args, context) => {
+const runRemoteFn = async (state, fn, root, args, context) => {
   console.log(
     `Remote resolver for ${fn.name} called with: root = ${JSON.stringify(
       root
@@ -250,30 +256,27 @@ const resolveRemoteFn = async (state, fn, root, args, context) => {
 const buildResolver = (state, fn) => {
   const ops = fn.implementation.operations
   if (ops.length > 1) {
-    log(SELF).info(`⟶  ${fn.name}: [${ops.map((x) => x.function.name)}]`)
-    return (root, args, context) =>
-      resolveFnGraph(state, fn, root, args, context)
+    log.info(`⚡ ${fn.name}: [${ops.map((x) => x.function.name)}]`)
+    return (root, args, context) => runFnGraph(state, fn, root, args, context)
   }
   const op = ops[0]
   if (op.function.service.id === state.lambdaServiceId) {
-    log(SELF).info(`⟶  ${fn.name}: ${state.lambdaIndex[fn.name].runtime.id}`)
+    const lambda = state.lambdaIndex[fn.name]
     return (root, args, context) =>
-      resolveLambda(state, fn, root, args, context)
+      runLambda(state, lambda, root, args, context)
   }
   const remoteSvc = state.svcIndex[op.function.service.id]
   if (remoteSvc) {
-    log(SELF).info(
-      `⟶  ${fn.name}: ${op.function.service.id}/${op.function.name} @ ${remoteSvc.endpointUrl}`
+    log.info(
+      `⚡ ${fn.name}: ${op.function.service.id}/${op.function.name} @ ${remoteSvc.endpointUrl}`
     )
-    return (root, args, context) =>
-      resolveRemoteFn(state, fn, root, args, context)
+    return (root, args, context) => runRemoteFn(state, fn, root, args, context)
   }
-  console.log('unknown ->', fn.name, JSON.stringify(fn, null, 2))
   throw new Error(`Unknown function type: ${fn.name}`)
 }
 
 const buildResolvers = (state) => {
-  log(SELF).info(`Building resolvers for ${state.serviceId}`)
+  log.info(`🚧 Building resolvers for ${state.serviceId}`)
 
   const resolvers = {
     [RootTypeEnum.Query]: {
