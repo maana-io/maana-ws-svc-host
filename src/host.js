@@ -160,17 +160,17 @@ const fnToGraphQLField = (state, fn) => {
       fn.outputModifiers
     ),
     description: fn.description,
-    args: fn.arguments.reduce((acc, cur) => {
-      acc[cur.name] = {
+    args: fn.arguments.reduce((args, arg) => {
+      args[arg.name] = {
         type: kindToGraphQLType(
           state,
-          cur.type,
-          cur.typeKindId,
-          cur.modifiers,
+          arg.type,
+          arg.typeKindId,
+          arg.modifiers,
           true
         ),
       }
-      return acc
+      return args
     }, {}),
   }
   return field
@@ -249,11 +249,10 @@ const runFnGraph = async (state, fn, root, args, context) => {
   )
 }
 
-const runLambda = async (state, lambda, root, args, context) => {
+const runLambda = async (_state, lambda, _root, args, context) => {
   if (lambda.runtime.id !== SupportedLambdas.QJavaScript)
     throw new Error(`Unsupported Lambda runtime: ${lambda.runtime.id}`)
 
-  log.info(`⚡ Lambda: ${lambda.name}, runtime: ${lambda.runtime.id}`)
   const startTime = new Date()
   const result = await runJavaScript({ input: args, lambda, context })
   const endTime = new Date()
@@ -275,7 +274,7 @@ const getArgTypeString = (arg) => {
   return base
 }
 
-const runRemoteFn = async (state, fn, endpointUrl, root, args, context) => {
+const runRemoteFn = async (_state, fn, endpointUrl, _root, args, _context) => {
   const op = fn.implementation.operations[0]
 
   let query = `${fn.graphqlOperationType === 'QUERY' ? 'query' : 'mutation'} ${
@@ -309,7 +308,9 @@ const runRemoteFn = async (state, fn, endpointUrl, root, args, context) => {
   const result = await request(endpointUrl, query, vars)
   const endTime = new Date()
   const elapsedTime = (endTime.getTime() - startTime.getTime()) / 1000
-  log.info(`⏲️  Remote: ${op.function.name} took ${elapsedTime} seconds`)
+  log.info(
+    `⏲️  Remote: ${op.function.name} @ ${endpointUrl} took ${elapsedTime} seconds`
+  )
   return result[op.function.name]
 }
 
@@ -329,9 +330,6 @@ const buildResolver = (state, fn) => {
   }
   const remoteSvc = state.svcIndex[op.function.service.id]
   if (remoteSvc) {
-    log.info(
-      `⚡ ${fn.name}: ${op.function.service.id}/${op.function.name} @ ${remoteSvc.endpointUrl}`
-    )
     return (root, args, context) =>
       runRemoteFn(state, fn, remoteSvc.endpointUrl, root, args, context)
   }
@@ -355,12 +353,12 @@ const buildResolvers = (state) => {
     [RootTypeEnum.Mutation]: {},
   }
 
-  state.ws.functions.reduce((acc, cur) => {
+  state.ws.functions.reduce((acc, fn) => {
     acc[
-      cur.graphqlOperationType === 'QUERY'
+      fn.graphqlOperationType === 'QUERY'
         ? RootTypeEnum.Query
         : RootTypeEnum.Mutation
-    ][cur.name] = buildResolver(state, cur)
+    ][fn.name] = buildResolver(state, fn)
     return acc
   }, resolvers)
 
