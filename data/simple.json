@@ -17,9 +17,7 @@
           "name": "id",
           "type": "ID",
           "typeKindId": "",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "kind": null
         },
         {
@@ -47,9 +45,7 @@
           "name": "id",
           "type": "ID",
           "typeKindId": "",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "kind": null
         },
         {
@@ -57,9 +53,7 @@
           "name": "createdOn",
           "type": "DATETIME",
           "typeKindId": "",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "kind": null
         },
         {
@@ -67,9 +61,7 @@
           "name": "buzz",
           "type": "KIND",
           "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "kind": {
             "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
             "name": "Buzz",
@@ -97,9 +89,7 @@
           "id": "f98555ca-bddf-4e6c-9d84-a8640ff1f9fd",
           "name": "bar",
           "type": "STRING",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": null,
           "kind": null
         },
@@ -107,9 +97,7 @@
           "id": "0850d45d-a37c-4138-bfea-9f98ef5ccb23",
           "name": "baz",
           "type": "STRING",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": null,
           "kind": null
         }
@@ -164,9 +152,7 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -210,9 +196,7 @@
           "id": "c47a781c-4b04-4886-ae95-d90d5006a157",
           "name": "fizz",
           "type": "KIND",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
           "kind": {
             "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
@@ -338,9 +322,7 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -405,9 +387,7 @@
           "id": "af204d08-99a3-47eb-bcd6-00cb1a9a6c64",
           "name": "dateTime",
           "type": "DATETIME",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": null,
           "kind": null
         }
@@ -450,9 +430,7 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -496,9 +474,7 @@
           "id": "b69063f3-d088-4650-84dd-a570a9600cef",
           "name": "fizz",
           "type": "KIND",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
           "kind": {
             "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
@@ -548,9 +524,7 @@
       "graphqlOperationType": "QUERY",
       "outputType": "KIND",
       "outputKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": {
         "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
         "name": "Buzz",
@@ -644,9 +618,7 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -690,9 +662,7 @@
           "id": "d93689cb-5665-47ef-94ff-f447c373ae3a",
           "name": "buzz",
           "type": "KIND",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
           "kind": {
             "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
@@ -853,9 +823,7 @@
       "graphqlOperationType": "MUTATION",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -927,9 +895,7 @@
           "id": "23cfa4c7-aebd-45ad-b3cc-b2a4c6a90d9a",
           "name": "fizz",
           "type": "KIND",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
           "kind": {
             "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
@@ -979,9 +945,7 @@
       "graphqlOperationType": "QUERY",
       "outputType": "DATETIME",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -1025,9 +989,7 @@
           "id": "33bb69ca-654f-49a7-a302-35b6a4dce57c",
           "name": "buzz",
           "type": "KIND",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
           "kind": {
             "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
@@ -1143,15 +1105,11 @@
         {
           "name": "dateTime",
           "kind": "DATETIME",
-          "modifiers": [
-            "NONULL"
-          ]
+          "modifiers": ["NONULL"]
         }
       ],
       "outputKind": "STRING",
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kinds": [],
       "graphQLOperationType": "QUERY"
     },
@@ -1167,22 +1125,16 @@
         {
           "name": "bar",
           "kind": "STRING",
-          "modifiers": [
-            "NONULL"
-          ]
+          "modifiers": ["NONULL"]
         },
         {
           "name": "baz",
           "kind": "STRING",
-          "modifiers": [
-            "NONULL"
-          ]
+          "modifiers": ["NONULL"]
         }
       ],
       "outputKind": "STRING",
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kinds": [],
       "graphQLOperationType": "QUERY"
     },
@@ -1198,15 +1150,11 @@
         {
           "name": "fizz",
           "kind": "FizzInput",
-          "modifiers": [
-            "NONULL"
-          ]
+          "modifiers": ["NONULL"]
         }
       ],
       "outputKind": "DATETIME",
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kinds": [
         {
           "name": "FizzInput",
@@ -1214,23 +1162,17 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             },
             {
               "name": "createdOn",
               "kind": "DATETIME",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             },
             {
               "name": "buzz",
               "kind": "BuzzInput",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             }
           ]
         },
@@ -1240,9 +1182,7 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             },
             {
               "name": "json",
@@ -1266,15 +1206,11 @@
         {
           "name": "fizz",
           "kind": "FizzInput",
-          "modifiers": [
-            "NONULL"
-          ]
+          "modifiers": ["NONULL"]
         }
       ],
       "outputKind": "Buzz",
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kinds": [
         {
           "name": "FizzInput",
@@ -1282,23 +1218,17 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             },
             {
               "name": "createdOn",
               "kind": "DATETIME",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             },
             {
               "name": "buzz",
               "kind": "BuzzInput",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             }
           ]
         },
@@ -1308,9 +1238,7 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             },
             {
               "name": "json",
@@ -1325,9 +1253,7 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             },
             {
               "name": "json",
@@ -1351,9 +1277,7 @@
         {
           "name": "buzz",
           "kind": "BuzzInput",
-          "modifiers": [
-            "NONULL"
-          ]
+          "modifiers": ["NONULL"]
         }
       ],
       "outputKind": "JSON",
@@ -1365,9 +1289,7 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             },
             {
               "name": "json",
@@ -1386,7 +1308,7 @@
       "runtime": {
         "id": "Q+JavaScript"
       },
-      "code": "return JSON.stringify(input.json) || \"\"",
+      "code": "return input.json || \"\"",
       "input": [
         {
           "name": "json",
@@ -1395,9 +1317,7 @@
         }
       ],
       "outputKind": "STRING",
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kinds": [],
       "graphQLOperationType": "QUERY"
     }

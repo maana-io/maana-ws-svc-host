@@ -1,0 +1,233 @@
+{
+  "id": "5276ddea-26b7-4686-bd5b-c310564cdd63",
+  "name": "bazz",
+  "description": null,
+  "service": {
+    "id": "donald-simple",
+    "name": "Simple"
+  },
+  "arguments": [
+    {
+      "id": "d93689cb-5665-47ef-94ff-f447c373ae3a",
+      "name": "buzz",
+      "type": "KIND",
+      "modifiers": ["NONULL"],
+      "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+      "kind": {
+        "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
+        "name": "Buzz",
+        "service": {
+          "id": "donald-simple",
+          "name": "Simple"
+        }
+      }
+    }
+  ],
+  "implementation": {
+    "id": "b02d8a01-7b32-4602-b542-0117ffc7c081",
+    "entrypoint": {
+      "id": "93ccd68b-5983-478b-9586-716d19f1ae02"
+    },
+    "operations": [
+      {
+        "id": "caf8a712-fb82-4e25-aa2f-64a55516fada",
+        "type": "APPLY",
+        "function": {
+          "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384_projector",
+          "name": "projectJsonFromBuzz",
+          "service": {
+            "id": "donald-simple",
+            "name": "Simple"
+          }
+        },
+        "argumentValues": [
+          {
+            "id": "6822308f-696c-448b-90b1-9d3b9adaf1ef",
+            "argument": {
+              "id": "33bb69ca-654f-49a7-a302-35b6a4dce57c",
+              "name": "buzz"
+            },
+            "operation": null,
+            "argumentRef": {
+              "id": "d93689cb-5665-47ef-94ff-f447c373ae3a",
+              "name": "buzz"
+            }
+          }
+        ]
+      },
+      {
+        "id": "5091ef07-9045-4066-b4e8-457658723261",
+        "type": "APPLY",
+        "function": {
+          "id": "bfc15d43-df5a-42f1-923f-d3b2ec1e8dc1",
+          "name": "jsonToString",
+          "service": {
+            "id": "donald-simple",
+            "name": "Simple"
+          }
+        },
+        "argumentValues": [
+          {
+            "id": "be498490-aabb-4302-977f-aef385db3d4b",
+            "argument": {
+              "id": "68f5573a-e190-4786-9ee1-c65a019126d9",
+              "name": "json"
+            },
+            "operation": {
+              "id": "caf8a712-fb82-4e25-aa2f-64a55516fada"
+            },
+            "argumentRef": null
+          }
+        ]
+      },
+      {
+        "id": "679f060b-76cf-4607-b61a-27fc86339c61",
+        "type": "APPLY",
+        "function": {
+          "id": "3ae44a87-0bb7-42b1-ab6a-659d28dfbcdf",
+          "name": "jsonToString",
+          "service": {
+            "id": "io.maana.scalars",
+            "name": "Maana Scalars"
+          }
+        },
+        "argumentValues": [
+          {
+            "id": "c0b66991-a883-4034-a813-2b7641bcc0dd",
+            "argument": {
+              "id": "4b39bcae-b3d5-4c0c-833b-168f3fe370c6",
+              "name": "x"
+            },
+            "operation": {
+              "id": "6cb59261-dd73-4779-8f52-3c0e43171d5c"
+            },
+            "argumentRef": null
+          }
+        ]
+      },
+      {
+        "id": "6cb59261-dd73-4779-8f52-3c0e43171d5c",
+        "type": "APPLY",
+        "function": {
+          "id": "4142d727-ae2b-4ea2-a753-541c9523beeb",
+          "name": "jsonCoerceFromOpt",
+          "service": {
+            "id": "io.maana.scalars",
+            "name": "Maana Scalars"
+          }
+        },
+        "argumentValues": [
+          {
+            "id": "7a56bfc5-d512-4d54-9e41-05f59a7176de",
+            "argument": {
+              "id": "4fc96a53-9ffd-4f8b-8b90-444578ba12c6",
+              "name": "x"
+            },
+            "operation": {
+              "id": "caf8a712-fb82-4e25-aa2f-64a55516fada"
+            },
+            "argumentRef": null
+          }
+        ]
+      },
+      {
+        "id": "93ccd68b-5983-478b-9586-716d19f1ae02",
+        "type": "APPLY",
+        "function": {
+          "id": "11202148-f939-4c08-8535-ca1e0da453b3",
+          "name": "stringConcat",
+          "service": {
+            "id": "io.maana.scalars",
+            "name": "Maana Scalars"
+          }
+        },
+        "argumentValues": [
+          {
+            "id": "03ae9925-078c-4b81-9586-de157e4b4f59",
+            "argument": {
+              "id": "a0069902-d8b2-4499-8f20-ae488e12fe9a",
+              "name": "b"
+            },
+            "operation": {
+              "id": "679f060b-76cf-4607-b61a-27fc86339c61"
+            },
+            "argumentRef": null
+          },
+          {
+            "id": "181e7e4c-e432-4c5a-98db-4bf739323c93",
+            "argument": {
+              "id": "f4d3e3e3-e490-49b4-b0a1-eb8d5ddca662",
+              "name": "a"
+            },
+            "operation": {
+              "id": "5091ef07-9045-4066-b4e8-457658723261"
+            },
+            "argumentRef": null
+          }
+        ]
+      }
+    ]
+  },
+  "functionType": "CKG",
+  "graphqlOperationType": "MUTATION",
+  "outputType": "STRING",
+  "outputKindId": null,
+  "outputModifiers": ["NONULL"],
+  "kind": null,
+  "graph": {
+    "zoom": 100,
+    "offsetX": 0,
+    "offsetY": 0,
+    "nodes": [
+      {
+        "id": "97562262-9a8a-404f-85e0-f6a9881cad82INPUT",
+        "x": -32,
+        "y": 32,
+        "collapsed": false,
+        "operationId": null
+      },
+      {
+        "id": "706c2d26-8079-4ab6-b704-8da953d1cf1dOUTPUT",
+        "x": 1056,
+        "y": 32,
+        "collapsed": false,
+        "operationId": null
+      },
+      {
+        "id": "d8ab78ba-7a06-4188-b9c3-24b9bd2fec82",
+        "x": 160,
+        "y": 32,
+        "collapsed": false,
+        "operationId": "caf8a712-fb82-4e25-aa2f-64a55516fada"
+      },
+      {
+        "id": "a84c2e8a-f43b-4403-9bc2-a47f2a362db7",
+        "x": 352,
+        "y": 32,
+        "collapsed": false,
+        "operationId": "5091ef07-9045-4066-b4e8-457658723261"
+      },
+      {
+        "id": "756c915f-a4d1-4800-ac10-aa7db7006204",
+        "x": 608,
+        "y": 160,
+        "collapsed": false,
+        "operationId": "679f060b-76cf-4607-b61a-27fc86339c61"
+      },
+      {
+        "id": "18b77676-6cb9-4e54-a3a3-0e342434436f",
+        "x": 352,
+        "y": 160,
+        "collapsed": false,
+        "operationId": "6cb59261-dd73-4779-8f52-3c0e43171d5c"
+      },
+      {
+        "id": "98373eb3-42ca-44ae-92c7-45505f7e7a40",
+        "x": 832,
+        "y": 32,
+        "collapsed": false,
+        "operationId": "93ccd68b-5983-478b-9586-716d19f1ae02"
+      }
+    ]
+  }
+}

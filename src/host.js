@@ -91,6 +91,10 @@ const indexFunctions = (state) => ({
       argIndex[arg.name] = arg
       return argIndex
     }, {})
+    fn.opIndex = fn.implementation.operations.reduce((opIndex, op) => {
+      opIndex[op.id] = op
+      return opIndex
+    }, {})
     fnIndex[fn.id] = fn
     return fnIndex
   }, {}),
@@ -307,7 +311,7 @@ const runLambda = async (state, fn, lambda, _root, args, context) => {
   }
   const endTime = new Date()
   const elapsedTime = (endTime.getTime() - startTime.getTime()) / 1000
-  log.info(`⏲️  Lambda: ${lambda.name} took ${elapsedTime} seconds`)
+  log.info(`⏱️  Lambda: ${lambda.name} took ${elapsedTime} seconds`)
   return result
 }
 
@@ -332,7 +336,7 @@ const runRemoteFn = async (state, fn, svc, _root, args, _context) => {
   const endTime = new Date()
   const elapsedTime = (endTime.getTime() - startTime.getTime()) / 1000
   log.info(
-    `⏲️  Remote: ${op.function.name} @ ${svc.endpointUrl} took ${elapsedTime} seconds`
+    `⏱️  Remote: ${op.function.name} @ ${svc.endpointUrl} took ${elapsedTime} seconds`
   )
 
   return result[op.function.name]
@@ -340,23 +344,76 @@ const runRemoteFn = async (state, fn, svc, _root, args, _context) => {
 
 // ---
 
+const buildCallTree = (fn, op) => {
+  const deps = op.argumentValues.reduce((deps, av) => {
+    if (!av.operation) {
+      if (av.argumentRef) {
+        deps[av.argument.name] = { fromInput: fn.argIndex[av.argumentRef.name] }
+      }
+    } else {
+      const depOp = fn.opIndex[av.operation.id]
+      deps[av.argument.name] = { fromOutput: depOp }
+      if (!depOp.deps) {
+        depOp.deps = buildCallTree(fn, depOp)
+      }
+    }
+    return deps
+  }, {})
+  // console.log('buildCallTree', op.id, op.function.name, deps)
+  return deps
+}
+
+const printCallTree = (fn, op) => {
+  console.group(`${op.function.name}(`)
+  if (!op.deps || !Object.keys(op.deps)) {
+    console.log('No dependencies')
+    // console.log(`${key} <- ${value.function.name}`)
+  } else {
+    Object.entries(op.deps).forEach(([key, value]) => {
+      if (value.fromInput) {
+        console.log(`${key} <- ${fn.name}.${value.fromInput.name}`)
+      } else {
+        console.log(`${key} <-`)
+        printCallTree(fn, value.fromOutput)
+      }
+    })
+  }
+  console.groupEnd()
+  console.log(')')
+}
+
 const buildResolver = (state, fn) => {
+  // Detect the type of resolver needed: FG, lambda, or remote
   const ops = fn.implementation.operations
+
+  // FGs have more than one op
   if (ops.length > 1) {
     log.info(`⚡ ${fn.name}: [${ops.map((x) => x.function.name)}]`)
+    const entryOp = fn.opIndex[fn.implementation.entrypoint.id]
+
+    // Prepare the call graph so that we do minimal work at runtime
+    entryOp.deps = buildCallTree(fn, entryOp)
+    //console.log(JSON.stringify(entryOp.deps, null, 2))
+    printCallTree(fn, entryOp)
     return (root, args, context) => runFnGraph(state, fn, root, args, context)
   }
+
   const op = ops[0]
+
+  // Lambdas have an associated lambda service ID
   if (op.function.service.id === state.lambdaServiceId) {
     const lambda = state.lambdaIndex[fn.name]
     return (root, args, context) =>
       runLambda(state, fn, lambda, root, args, context)
   }
+
+  // Remotes have an associated service
   const remoteSvc = state.svcIndex[op.function.service.id]
   if (remoteSvc) {
     return (root, args, context) =>
       runRemoteFn(state, fn, remoteSvc, root, args, context)
   }
+
   throw new Error(`Unknown function type: ${fn.name}`)
 }
 
