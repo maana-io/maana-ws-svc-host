@@ -2,27 +2,15 @@ query info {
   info {
     id
     name
-    version
     description
+    version
   }
 }
 
-mutation addPerson {
-  addPerson(
-    input: {
-      id: 0
-      givenName: "alice"
-      familyName: "toklas"
-      dateOfBirth: "April 30, 1877"
-    }
-  )
+query bar {
+  bar(dateTime: "2007-12-03T10:15:30Z")
 }
 
-query allPeople {
-  allPeople {
-    id
-    givenName
-    familyName
-    dateOfBirth
-  }
+query jsonToString {
+  jsonToString(json: "{\"id\":\"1\"}")
 }

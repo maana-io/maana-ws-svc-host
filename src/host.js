@@ -14,6 +14,7 @@ import {
 } from 'graphql'
 import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date'
 import { GraphQLJSON } from 'graphql-type-json'
+import { request } from 'graphql-request'
 
 // --- Internal imports
 import { log } from './utils.js'
@@ -30,7 +31,7 @@ const RootTypeEnum = {
   Mutation: 'RootMutation',
 }
 
-const ScalarEnum = {
+const ScalarToGraphQLObject = {
   BOOLEAN: GraphQLBoolean,
   FLOAT: GraphQLFloat,
   ID: GraphQLID,
@@ -44,6 +45,20 @@ const ScalarEnum = {
   TIME: GraphQLTime,
 }
 
+const ScalarToGraphQLScalar = {
+  BOOLEAN: 'Boolean',
+  FLOAT: 'Float',
+  ID: 'ID',
+  INT: 'Int',
+  STRING: 'String',
+  //
+  JSON: 'JSON',
+  //
+  DATE: 'Date',
+  DATETIME: 'DateTime',
+  TIME: 'Time',
+}
+
 // ---
 
 const compose = (...funcs) => (initialArg) =>
@@ -53,29 +68,33 @@ const compose = (...funcs) => (initialArg) =>
 
 const indexServices = (state) => ({
   ...state,
-  svcIndex: state.ws.services.reduce((acc, cur) => {
-    acc[cur.id] = cur
-    return acc
+  svcIndex: state.ws.services.reduce((svcIndex, svc) => {
+    svcIndex[svc.id] = svc
+    return svcIndex
   }, {}),
 })
 
 const indexKinds = (state) => ({
   ...state,
-  kindIndex: state.ws.kinds.reduce((acc, cur) => {
-    acc[cur.id] = cur
-    return acc
+  kindIndex: state.ws.kinds.reduce((kindIndex, kind) => {
+    kindIndex[kind.id] = kind
+    return kindIndex
   }, {}),
 })
 
 const indexFunctions = (state) => ({
   ...state,
-  fnIndex: state.ws.functions.reduce((acc, cur) => {
-    acc[cur.id] = cur
-    return acc
+  fnIndex: state.ws.functions.reduce((fnIndex, fn) => {
+    fn.argIndex = fn.arguments.reduce((argIndex, arg) => {
+      argIndex[arg.name] = arg
+      return argIndex
+    }, {})
+    fnIndex[fn.id] = fn
+    return fnIndex
   }, {}),
-  lambdaIndex: state.ws.lambda.reduce((acc, cur) => {
-    acc[cur.name] = cur
-    return acc
+  lambdaIndex: state.ws.lambda.reduce((lambdaIndex, lambda) => {
+    lambdaIndex[lambda.name] = lambda
+    return lambdaIndex
   }, {}),
 })
 
@@ -115,7 +134,7 @@ const kindToGraphQLObject = (state, kind, isInput) => {
 const kindToGraphQLType = (state, type, kindId, modifiers, isInput) => {
   let base
   if (type !== 'KIND') {
-    base = ScalarEnum[type]
+    base = ScalarToGraphQLObject[type]
     if (!base) throw new Error(`Unknown scalar: ${type}`)
   } else if (kindId) {
     const kind = state.kindIndex[kindId]
@@ -243,12 +262,55 @@ const runLambda = async (state, lambda, root, args, context) => {
   return result
 }
 
-const runRemoteFn = async (state, fn, root, args, context) => {
-  console.log(
-    `Remote resolver for ${fn.name} called with: root = ${JSON.stringify(
-      root
-    )}, args = ${JSON.stringify(args)}, ctx = ${JSON.stringify(context)}`
-  )
+const getArgTypeString = (arg) => {
+  const base = ScalarToGraphQLScalar[arg.type]
+  if (arg.modifiers.includes('LIST')) {
+    if (arg.modifiers.includes('NONULL')) {
+      return `[${base}!]!`
+    }
+    return `[${base}]`
+  } else if (arg.modifiers.includes('NONULL')) {
+    return `${base}!`
+  }
+  return base
+}
+
+const runRemoteFn = async (state, fn, endpointUrl, root, args, context) => {
+  const op = fn.implementation.operations[0]
+
+  let query = `${fn.graphqlOperationType === 'QUERY' ? 'query' : 'mutation'} ${
+    op.function.name
+  }(`
+
+  const inputDefs = op.argumentValues
+    .map(
+      (arg) =>
+        `$${arg.argument.name}: ${getArgTypeString(
+          fn.argIndex[arg.argumentRef.name]
+        )}`
+    )
+    .join(',')
+
+  query += `${inputDefs}) { ${op.function.name}(`
+
+  // specify the input variables
+  const inputVals = op.argumentValues
+    .map((arg) => `${arg.argument.name}: $${arg.argument.name}`)
+    .join(',')
+
+  query += `${inputVals}) }`
+
+  const vars = op.argumentValues.reduce((acc, cur) => {
+    acc[cur.argument.name] = args[cur.argumentRef.name]
+    return acc
+  }, {})
+
+  const startTime = new Date()
+  const result = await request(endpointUrl, query, vars)
+  const endTime = new Date()
+  const elapsedTime = (endTime.getTime() - startTime.getTime()) / 1000
+  log.info(`⏲️  Remote: ${op.function.name} took ${elapsedTime} seconds`)
+  return result[op.function.name]
 }
 
 // ---
@@ -270,7 +332,8 @@ const buildResolver = (state, fn) => {
     log.info(
       `⚡ ${fn.name}: ${op.function.service.id}/${op.function.name} @ ${remoteSvc.endpointUrl}`
     )
-    return (root, args, context) => runRemoteFn(state, fn, root, args, context)
+    return (root, args, context) =>
+      runRemoteFn(state, fn, remoteSvc.endpointUrl, root, args, context)
   }
   throw new Error(`Unknown function type: ${fn.name}`)
 }
