@@ -15,6 +15,8 @@ import {
 import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date'
 import { GraphQLJSON } from 'graphql-type-json'
 import { request } from 'graphql-request'
+import hash from 'object-hash'
+import LRU from 'lru-cache'
 
 // --- Internal imports
 import { log } from './utils.js'
@@ -239,28 +241,6 @@ const buildSchema = (state) => {
   return state
 }
 
-// --- Resolvers
-
-const runFnGraph = async (state, fn, root, args, context) => {
-  console.log(
-    `FG resolver for ${fn.name} called with: root = ${JSON.stringify(
-      root
-    )}, args = ${JSON.stringify(args)}, ctx = ${JSON.stringify(context)}`
-  )
-}
-
-const runLambda = async (_state, lambda, _root, args, context) => {
-  if (lambda.runtime.id !== SupportedLambdas.QJavaScript)
-    throw new Error(`Unsupported Lambda runtime: ${lambda.runtime.id}`)
-
-  const startTime = new Date()
-  const result = await runJavaScript({ input: args, lambda, context })
-  const endTime = new Date()
-  const elapsedTime = (endTime.getTime() - startTime.getTime()) / 1000
-  log.info(`⏲️  Lambda: ${lambda.name} took ${elapsedTime} seconds`)
-  return result
-}
-
 const getArgTypeString = (arg) => {
   const base = ScalarToGraphQLScalar[arg.type]
   if (arg.modifiers.includes('LIST')) {
@@ -274,7 +254,7 @@ const getArgTypeString = (arg) => {
   return base
 }
 
-const runRemoteFn = async (_state, fn, endpointUrl, _root, args, _context) => {
+const buildQuery = (fn) => {
   const op = fn.implementation.operations[0]
 
   let query = `${fn.graphqlOperationType === 'QUERY' ? 'query' : 'mutation'} ${
@@ -299,18 +279,62 @@ const runRemoteFn = async (_state, fn, endpointUrl, _root, args, _context) => {
 
   query += `${inputVals}) }`
 
-  const vars = op.argumentValues.reduce((acc, cur) => {
-    acc[cur.argument.name] = args[cur.argumentRef.name]
-    return acc
-  }, {})
+  return query
+}
+
+// --- Resolvers
+
+const runFnGraph = async (state, fn, root, args, context) => {
+  console.log(
+    `FG resolver for ${fn.name} called with: root = ${JSON.stringify(
+      root
+    )}, args = ${JSON.stringify(args)}, ctx = ${JSON.stringify(context)}`
+  )
+}
+
+const runLambda = async (state, fn, lambda, _root, args, context) => {
+  if (lambda.runtime.id !== SupportedLambdas.QJavaScript)
+    throw new Error(`Unsupported Lambda runtime: ${lambda.runtime.id}`)
 
   const startTime = new Date()
-  const result = await request(endpointUrl, query, vars)
+  const cacheKey = hash({ id: fn.id, args })
+  let result = state.resultsCache.get(cacheKey)
+  if (!result) {
+    result = await runJavaScript({ input: args, lambda, context })
+  }
+  if (fn.graphqlOperationType === 'QUERY') {
+    state.resultsCache.set(cacheKey, result)
+  }
+  const endTime = new Date()
+  const elapsedTime = (endTime.getTime() - startTime.getTime()) / 1000
+  log.info(`⏲️  Lambda: ${lambda.name} took ${elapsedTime} seconds`)
+  return result
+}
+
+const runRemoteFn = async (state, fn, svc, _root, args, _context) => {
+  const startTime = new Date()
+  const op = fn.implementation.operations[0]
+  const cacheKey = hash({ id: fn.id, args })
+  let result = state.resultsCache.get(cacheKey)
+  if (!result) {
+    fn.query = fn.query || buildQuery(fn) // compile once
+
+    const vars = op.argumentValues.reduce((acc, cur) => {
+      acc[cur.argument.name] = args[cur.argumentRef.name]
+      return acc
+    }, {})
+
+    result = await request(svc.endpointUrl, fn.query, vars)
+  }
+  if (fn.graphqlOperationType === 'QUERY') {
+    state.resultsCache.set(cacheKey, result)
+  }
   const endTime = new Date()
   const elapsedTime = (endTime.getTime() - startTime.getTime()) / 1000
   log.info(
-    `⏲️  Remote: ${op.function.name} @ ${endpointUrl} took ${elapsedTime} seconds`
+    `⏲️  Remote: ${op.function.name} @ ${svc.endpointUrl} took ${elapsedTime} seconds`
   )
+
   return result[op.function.name]
 }
 
@@ -326,12 +350,12 @@ const buildResolver = (state, fn) => {
   if (op.function.service.id === state.lambdaServiceId) {
     const lambda = state.lambdaIndex[fn.name]
     return (root, args, context) =>
-      runLambda(state, lambda, root, args, context)
+      runLambda(state, fn, lambda, root, args, context)
   }
   const remoteSvc = state.svcIndex[op.function.service.id]
   if (remoteSvc) {
     return (root, args, context) =>
-      runRemoteFn(state, fn, remoteSvc.endpointUrl, root, args, context)
+      runRemoteFn(state, fn, remoteSvc, root, args, context)
   }
   throw new Error(`Unknown function type: ${fn.name}`)
 }
@@ -375,6 +399,7 @@ export const createHost = (ws) => {
     lambdaServiceId: `${ws.id}_lambda`,
     inputKinds: {},
     outputKinds: {},
+    resultsCache: new LRU(),
   }
 
   state = compose(indexWorkspace, buildSchema, buildResolvers)(state)

@@ -51,6 +51,7 @@
     "json-query": "^2.2.2",
     "jwks-rsa": "^1.8.0",
     "lodash": "^4.17.15",
+    "lru-cache": "^5.1.1",
     "maana-physical-quantity-ast": "^3.2.2-beta.51",
     "mathjs": "^7.0.0",
     "moment": "^2.25.3",
