@@ -1,6 +1,7 @@
 // --- Exdternal imports
-import { addResolversToSchema } from 'graphql-tools'
+import { addResolversToSchema, introspectSchema } from 'graphql-tools'
 import {
+  getIntrospectionQuery,
   GraphQLBoolean,
   GraphQLString,
   GraphQLInt,
@@ -11,10 +12,12 @@ import {
   GraphQLNonNull,
   GraphQLSchema,
   GraphQLID,
+  parse,
 } from 'graphql'
 import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date'
 import { GraphQLJSON } from 'graphql-type-json'
 import { request } from 'graphql-request'
+import { fetch } from 'cross-fetch'
 import hash from 'object-hash'
 import LRU from 'lru-cache'
 
@@ -393,7 +396,7 @@ const buildResolver = (state, fn) => {
 
     // Prepare the call graph so that we do minimal work at runtime
     entryOp.deps = buildCallTree(fn, entryOp)
-    //console.log(JSON.stringify(entryOp.deps, null, 2))
+    // console.log(JSON.stringify(entryOp.deps, null, 2))
     printCallTree(fn, entryOp)
     return (root, args, context) => runFnGraph(state, fn, root, args, context)
   }
@@ -449,7 +452,29 @@ const buildResolvers = (state) => {
 
 // ---
 
-export const createHost = (ws) => {
+const harvestFunctions = (ws) => {
+  const fns = ws.functions.reduce((fnIndex, fn) => {
+    fnIndex[fn.id] = fn
+    return fn.implementation.operations.reduce((fnIndex, op) => {
+      fnIndex[op.id] = op
+      return fnIndex
+    }, fnIndex)
+  }, {})
+  return fns
+}
+
+const getRemoteSchema = async (endpointUrl) => {
+  const fetchResult = await fetch(endpointUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query: getIntrospectionQuery() }),
+  })
+  return fetchResult.json()
+}
+
+export const createHost = async (ws) => {
   let state = {
     ws,
     serviceId: ws.endpointServiceId,
@@ -458,6 +483,15 @@ export const createHost = (ws) => {
     outputKinds: {},
     resultsCache: new LRU(),
   }
+
+  // const remoteSchema = await getRemoteSchema(ws.services[0].endpointUrl)
+  // console.log(remoteSchema)
+
+  // const fnIndex = harvestFunctions(ws)
+  // Object.values(fnIndex).forEach((fn) => {
+  //   console.log()
+  // })
+  // process.exit(-1)
 
   state = compose(indexWorkspace, buildSchema, buildResolvers)(state)
 

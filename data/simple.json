@@ -17,7 +17,9 @@
           "name": "id",
           "type": "ID",
           "typeKindId": "",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "kind": null
         },
         {
@@ -45,7 +47,9 @@
           "name": "id",
           "type": "ID",
           "typeKindId": "",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "kind": null
         },
         {
@@ -53,7 +57,9 @@
           "name": "createdOn",
           "type": "DATETIME",
           "typeKindId": "",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "kind": null
         },
         {
@@ -61,7 +67,9 @@
           "name": "buzz",
           "type": "KIND",
           "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "kind": {
             "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
             "name": "Buzz",
@@ -89,7 +97,9 @@
           "id": "f98555ca-bddf-4e6c-9d84-a8640ff1f9fd",
           "name": "bar",
           "type": "STRING",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "typeKindId": null,
           "kind": null
         },
@@ -97,7 +107,9 @@
           "id": "0850d45d-a37c-4138-bfea-9f98ef5ccb23",
           "name": "baz",
           "type": "STRING",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "typeKindId": null,
           "kind": null
         }
@@ -152,7 +164,9 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -196,7 +210,9 @@
           "id": "c47a781c-4b04-4886-ae95-d90d5006a157",
           "name": "fizz",
           "type": "KIND",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
           "kind": {
             "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
@@ -261,6 +277,17 @@
                   "id": "aa6b3db7-998f-4596-a3bc-454eec76b42c"
                 },
                 "argumentRef": null
+              },
+              {
+                "id": "5fc959b2-16c7-499a-988d-110ad9bb30c4",
+                "argument": {
+                  "id": "0850d45d-a37c-4138-bfea-9f98ef5ccb23",
+                  "name": "baz"
+                },
+                "operation": {
+                  "id": "d4839341-f552-45ed-bf1a-20ec0c249ed4"
+                },
+                "argumentRef": null
               }
             ]
           },
@@ -315,6 +342,31 @@
                 }
               }
             ]
+          },
+          {
+            "id": "d4839341-f552-45ed-bf1a-20ec0c249ed4",
+            "type": "APPLY",
+            "function": {
+              "id": "5276ddea-26b7-4686-bd5b-c310564cdd63",
+              "name": "baz",
+              "service": {
+                "id": "donald-simple",
+                "name": "Simple"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "ea9bf057-5de7-4167-a596-063c89766975",
+                "argument": {
+                  "id": "d93689cb-5665-47ef-94ff-f447c373ae3a",
+                  "name": "buzz"
+                },
+                "operation": {
+                  "id": "9898acbe-c831-427a-9b90-f72ff7d19a35"
+                },
+                "argumentRef": null
+              }
+            ]
           }
         ]
       },
@@ -322,12 +374,14 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kind": null,
       "graph": {
         "zoom": 100,
-        "offsetX": -129,
-        "offsetY": -10,
+        "offsetX": -58,
+        "offsetY": 100,
         "nodes": [
           {
             "id": "1b246bce-b266-4423-82f8-d45518e8e6c7INPUT",
@@ -370,6 +424,13 @@
             "y": 32,
             "collapsed": false,
             "operationId": "81afe2bb-d0eb-4fd4-8cc2-120a7f07c5be"
+          },
+          {
+            "id": "94af493c-014e-4da4-8e97-9eb529ec1dd6",
+            "x": 512,
+            "y": 192,
+            "collapsed": false,
+            "operationId": "d4839341-f552-45ed-bf1a-20ec0c249ed4"
           }
         ]
       }
@@ -387,7 +448,9 @@
           "id": "af204d08-99a3-47eb-bcd6-00cb1a9a6c64",
           "name": "dateTime",
           "type": "DATETIME",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "typeKindId": null,
           "kind": null
         }
@@ -430,7 +493,9 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -474,7 +539,9 @@
           "id": "b69063f3-d088-4650-84dd-a570a9600cef",
           "name": "fizz",
           "type": "KIND",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
           "kind": {
             "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
@@ -524,7 +591,9 @@
       "graphqlOperationType": "QUERY",
       "outputType": "KIND",
       "outputKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kind": {
         "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
         "name": "Buzz",
@@ -618,7 +687,9 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -651,7 +722,7 @@
     },
     {
       "id": "5276ddea-26b7-4686-bd5b-c310564cdd63",
-      "name": "bazz",
+      "name": "baz",
       "description": null,
       "service": {
         "id": "donald-simple",
@@ -662,7 +733,9 @@
           "id": "d93689cb-5665-47ef-94ff-f447c373ae3a",
           "name": "buzz",
           "type": "KIND",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
           "kind": {
             "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
@@ -823,12 +896,14 @@
       "graphqlOperationType": "MUTATION",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kind": null,
       "graph": {
         "zoom": 100,
-        "offsetX": 0,
-        "offsetY": 0,
+        "offsetX": 109,
+        "offsetY": 115,
         "nodes": [
           {
             "id": "97562262-9a8a-404f-85e0-f6a9881cad82INPUT",
@@ -854,21 +929,21 @@
           {
             "id": "a84c2e8a-f43b-4403-9bc2-a47f2a362db7",
             "x": 352,
-            "y": 32,
+            "y": -128,
             "collapsed": false,
             "operationId": "5091ef07-9045-4066-b4e8-457658723261"
           },
           {
             "id": "756c915f-a4d1-4800-ac10-aa7db7006204",
             "x": 608,
-            "y": 160,
+            "y": 32,
             "collapsed": false,
             "operationId": "679f060b-76cf-4607-b61a-27fc86339c61"
           },
           {
             "id": "18b77676-6cb9-4e54-a3a3-0e342434436f",
             "x": 352,
-            "y": 160,
+            "y": 32,
             "collapsed": false,
             "operationId": "6cb59261-dd73-4779-8f52-3c0e43171d5c"
           },
@@ -895,7 +970,9 @@
           "id": "23cfa4c7-aebd-45ad-b3cc-b2a4c6a90d9a",
           "name": "fizz",
           "type": "KIND",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
           "kind": {
             "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
@@ -945,7 +1022,9 @@
       "graphqlOperationType": "QUERY",
       "outputType": "DATETIME",
       "outputKindId": null,
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -989,7 +1068,9 @@
           "id": "33bb69ca-654f-49a7-a302-35b6a4dce57c",
           "name": "buzz",
           "type": "KIND",
-          "modifiers": ["NONULL"],
+          "modifiers": [
+            "NONULL"
+          ],
           "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
           "kind": {
             "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
@@ -1105,11 +1186,15 @@
         {
           "name": "dateTime",
           "kind": "DATETIME",
-          "modifiers": ["NONULL"]
+          "modifiers": [
+            "NONULL"
+          ]
         }
       ],
       "outputKind": "STRING",
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kinds": [],
       "graphQLOperationType": "QUERY"
     },
@@ -1125,16 +1210,22 @@
         {
           "name": "bar",
           "kind": "STRING",
-          "modifiers": ["NONULL"]
+          "modifiers": [
+            "NONULL"
+          ]
         },
         {
           "name": "baz",
           "kind": "STRING",
-          "modifiers": ["NONULL"]
+          "modifiers": [
+            "NONULL"
+          ]
         }
       ],
       "outputKind": "STRING",
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kinds": [],
       "graphQLOperationType": "QUERY"
     },
@@ -1150,11 +1241,15 @@
         {
           "name": "fizz",
           "kind": "FizzInput",
-          "modifiers": ["NONULL"]
+          "modifiers": [
+            "NONULL"
+          ]
         }
       ],
       "outputKind": "DATETIME",
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kinds": [
         {
           "name": "FizzInput",
@@ -1162,17 +1257,23 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": ["NONULL"]
+              "modifiers": [
+                "NONULL"
+              ]
             },
             {
               "name": "createdOn",
               "kind": "DATETIME",
-              "modifiers": ["NONULL"]
+              "modifiers": [
+                "NONULL"
+              ]
             },
             {
               "name": "buzz",
               "kind": "BuzzInput",
-              "modifiers": ["NONULL"]
+              "modifiers": [
+                "NONULL"
+              ]
             }
           ]
         },
@@ -1182,7 +1283,9 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": ["NONULL"]
+              "modifiers": [
+                "NONULL"
+              ]
             },
             {
               "name": "json",
@@ -1206,11 +1309,15 @@
         {
           "name": "fizz",
           "kind": "FizzInput",
-          "modifiers": ["NONULL"]
+          "modifiers": [
+            "NONULL"
+          ]
         }
       ],
       "outputKind": "Buzz",
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kinds": [
         {
           "name": "FizzInput",
@@ -1218,17 +1325,23 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": ["NONULL"]
+              "modifiers": [
+                "NONULL"
+              ]
             },
             {
               "name": "createdOn",
               "kind": "DATETIME",
-              "modifiers": ["NONULL"]
+              "modifiers": [
+                "NONULL"
+              ]
             },
             {
               "name": "buzz",
               "kind": "BuzzInput",
-              "modifiers": ["NONULL"]
+              "modifiers": [
+                "NONULL"
+              ]
             }
           ]
         },
@@ -1238,7 +1351,9 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": ["NONULL"]
+              "modifiers": [
+                "NONULL"
+              ]
             },
             {
               "name": "json",
@@ -1253,7 +1368,9 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": ["NONULL"]
+              "modifiers": [
+                "NONULL"
+              ]
             },
             {
               "name": "json",
@@ -1277,7 +1394,9 @@
         {
           "name": "buzz",
           "kind": "BuzzInput",
-          "modifiers": ["NONULL"]
+          "modifiers": [
+            "NONULL"
+          ]
         }
       ],
       "outputKind": "JSON",
@@ -1289,7 +1408,9 @@
             {
               "name": "id",
               "kind": "ID",
-              "modifiers": ["NONULL"]
+              "modifiers": [
+                "NONULL"
+              ]
             },
             {
               "name": "json",
@@ -1308,7 +1429,7 @@
       "runtime": {
         "id": "Q+JavaScript"
       },
-      "code": "return input.json || \"\"",
+      "code": "return JSON.stringify(input.json) || \"\"",
       "input": [
         {
           "name": "json",
@@ -1317,29 +1438,26 @@
         }
       ],
       "outputKind": "STRING",
-      "outputModifiers": ["NONULL"],
+      "outputModifiers": [
+        "NONULL"
+      ],
       "kinds": [],
       "graphQLOperationType": "QUERY"
     }
   ],
   "endpointServiceId": "donald-simple",
-  "currentSelection": {
-    "kindName": "Function",
-    "id": "5276ddea-26b7-4686-bd5b-c310564cdd63",
-    "kindId": "8295d658-8b05-4f5e-b944-14ddfaf068b9"
-  },
   "knowledgeGraphs": [
     {
       "id": "84636eb1-6248-4483-94af-95dfbf49f75f",
       "name": "New Knowledge Graph",
-      "offsetX": 161,
-      "offsetY": 26,
+      "offsetX": 112,
+      "offsetY": 248,
       "zoom": 100,
       "nodes": [
         {
           "id": "635ed972-2361-4152-907c-0dfbf7dacab5",
-          "x": -64,
-          "y": 32,
+          "x": -128,
+          "y": -192,
           "collapsed": false,
           "function": {
             "id": "f885d013-14ce-4330-abe2-08d2c51db7dd",
@@ -1353,8 +1471,8 @@
         },
         {
           "id": "519304c1-45a1-4180-ad7f-4ffff0d54bb0",
-          "x": 192,
-          "y": 32,
+          "x": 64,
+          "y": -192,
           "collapsed": false,
           "function": {
             "id": "271eba2f-4850-441c-b744-fd80c5932589",
@@ -1368,8 +1486,8 @@
         },
         {
           "id": "13018815-96dd-4f7e-9019-40bc6151c149",
-          "x": -64,
-          "y": 160,
+          "x": 480,
+          "y": -192,
           "collapsed": false,
           "function": {
             "id": "dcc895b8-2610-4af4-bc9e-cf1d0c1f4c77",
@@ -1383,8 +1501,8 @@
         },
         {
           "id": "6df4ac55-0da3-443e-a134-c9473ec4f2f5",
-          "x": 416,
-          "y": 160,
+          "x": 192,
+          "y": 0,
           "collapsed": false,
           "kind": {
             "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
@@ -1398,8 +1516,8 @@
         },
         {
           "id": "c12c0e9f-5b4b-4c86-9a4d-992e0f71519c",
-          "x": 640,
-          "y": 160,
+          "x": 416,
+          "y": 0,
           "collapsed": false,
           "kind": {
             "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
@@ -1413,8 +1531,8 @@
         },
         {
           "id": "ab6b3008-fee8-494f-8d72-ba74e16a7a6d",
-          "x": 160,
-          "y": 288,
+          "x": -64,
+          "y": 128,
           "collapsed": false,
           "function": {
             "id": "a35d961a-9cab-43e7-a991-e4a2fc350294_projector",
@@ -1428,8 +1546,8 @@
         },
         {
           "id": "d236d54a-e478-45ad-8fcf-aed3cf1aa6ef",
-          "x": 192,
-          "y": 160,
+          "x": -64,
+          "y": 0,
           "collapsed": false,
           "function": {
             "id": "2d9c394c-614e-4876-8334-c35238657cc9_projector",
@@ -1443,8 +1561,8 @@
         },
         {
           "id": "d765f57d-0236-4616-a04c-62156f8b891c",
-          "x": 416,
-          "y": 320,
+          "x": -64,
+          "y": 256,
           "collapsed": false,
           "function": {
             "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384_projector",
@@ -1458,12 +1576,12 @@
         },
         {
           "id": "a3f0d480-9300-4a92-89e4-2817b72e800c",
-          "x": 416,
-          "y": 32,
+          "x": 288,
+          "y": -192,
           "collapsed": false,
           "function": {
             "id": "5276ddea-26b7-4686-bd5b-c310564cdd63",
-            "name": "bazz",
+            "name": "baz",
             "service": {
               "id": "donald-simple",
               "name": "Simple"
