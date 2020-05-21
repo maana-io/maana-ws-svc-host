@@ -7,15 +7,15 @@ import bodyParser from 'body-parser'
 import http from 'http'
 
 // --- Internal imports
-import env from './environment'
-import { log, SELF } from './utils.js'
-import { createHost, getSchema } from './host.js'
-import ws from '../data/simple.json'
 import { getCKGToken } from './auth'
+import env from './environment'
+import { log, SELF } from './utils'
+import { createHost, getSchema } from './host'
+import ws from '../data/simple.json'
 
 const initServer = async (options) => {
   // Try to get the auth token - it'll throw if not properly configured
-  getCKGToken()
+  await getCKGToken()
 
   // --- Host setup
 

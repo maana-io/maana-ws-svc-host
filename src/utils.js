@@ -1,18 +1,25 @@
 // --- External imports
-const { log } = require('io.maana.shared')
+import { log } from 'io.maana.shared'
 
 // --- Internal imports
-const pkg = require('../package')
+import pkg from '../package'
 
 // --- Environment variables
 
 const SELF = `${pkg.name}:${pkg.version}`
 
 // --- Functions
+const truncate = (input, at) =>
+  input?.length > at ? `${input.substring(0, at)}...` : input
+
+const compose = (...funcs) => (initialArg) =>
+  funcs.reduce((acc, func) => func(acc), initialArg)
 
 // --- Exports
 
 module.exports = {
-  SELF,
+  compose,
   log: log(SELF),
+  SELF,
+  truncate,
 }

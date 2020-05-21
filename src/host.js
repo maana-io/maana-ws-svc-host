@@ -1,7 +1,12 @@
 // --- Exdternal imports
-import { addResolversToSchema, introspectSchema } from 'graphql-tools'
+import { addResolversToSchema } from 'graphql-tools'
 import {
+  buildClientSchema,
   getIntrospectionQuery,
+  getNamedType,
+  getNullableType,
+  isListType,
+  isNonNullType,
   GraphQLBoolean,
   GraphQLString,
   GraphQLInt,
@@ -12,7 +17,6 @@ import {
   GraphQLNonNull,
   GraphQLSchema,
   GraphQLID,
-  parse,
 } from 'graphql'
 import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date'
 import { GraphQLJSON } from 'graphql-type-json'
@@ -22,8 +26,11 @@ import hash from 'object-hash'
 import LRU from 'lru-cache'
 
 // --- Internal imports
-import { log } from './utils.js'
-import runJavaScript from './runJavascript.js'
+import { getCKGToken } from './auth'
+import env from './environment'
+import { requestCkg, requestCkgEndpointUrl } from './requestCkg'
+import { compose, log } from './utils'
+import runJavaScript from './runJavascript'
 
 // --- Constants
 
@@ -64,51 +71,168 @@ const ScalarToGraphQLScalar = {
   TIME: 'Time',
 }
 
+const FnTypeEnum = {
+  Graph: 'Graph',
+  Lambda: 'Lambda',
+  Service: 'Service',
+}
+
 // ---
 
-const compose = (...funcs) => (initialArg) =>
-  funcs.reduce((acc, func) => func(acc), initialArg)
+const getRemoteSchema = async (endpointUrl) => {
+  const query = getIntrospectionQuery()
+  if (endpointUrl.startsWith(env.ckgEndpointUrl)) {
+    let token
+    try {
+      token = await getCKGToken()
+    } catch (error) {
+      log.error(`Error getting token: ${error}`)
+      throw error
+    }
+    const ckgResult = await requestCkgEndpointUrl({ endpointUrl, query, token })
+    return { data: ckgResult }
+  }
+
+  const fetchResult = await fetch(endpointUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query }),
+  })
+  return fetchResult.json()
+}
 
 // ---
 
-const indexServices = (state) => ({
-  ...state,
-  svcIndex: state.ws.services.reduce((svcIndex, svc) => {
-    svcIndex[svc.id] = svc
-    return svcIndex
-  }, {}),
-})
+const indexKinds = (kinds) =>
+  kinds.reduce((idx, kind) => {
+    idx[kind.name] = kind
+    return idx
+  }, {})
 
-const indexKinds = (state) => ({
-  ...state,
-  kindIndex: state.ws.kinds.reduce((kindIndex, kind) => {
-    kindIndex[kind.id] = kind
-    return kindIndex
-  }, {}),
-})
+const indexLambdas = (ws) =>
+  ws.lambda.reduce((idx, lambda) => {
+    const id = `${lambda.serviceId}_lambda/${lambda.name}`
+    idx[id] = {
+      // Common function description
+      id,
+      name: lambda.name,
+      description: null,
+      graphqlOperationType: lambda.graphqlOperationType,
+      input: lambda.input,
+      output: {
+        kind: lambda.outputKind,
+        modifiers: lambda.outputModifiers,
+      },
+      // Lamdba-specific
+      type: FnTypeEnum.Lambda,
+      runtime: lambda.runtime.id,
+      code: lambda.code,
+    }
+    return idx
+  }, {})
 
-const indexFunctions = (state) => ({
-  ...state,
-  fnIndex: state.ws.functions.reduce((fnIndex, fn) => {
-    fn.argIndex = fn.arguments.reduce((argIndex, arg) => {
-      argIndex[arg.name] = arg
-      return argIndex
-    }, {})
-    fn.opIndex = fn.implementation.operations.reduce((opIndex, op) => {
-      opIndex[op.id] = op
-      return opIndex
-    }, {})
-    fnIndex[fn.id] = fn
-    return fnIndex
-  }, {}),
-  lambdaIndex: state.ws.lambda.reduce((lambdaIndex, lambda) => {
-    lambdaIndex[lambda.name] = lambda
-    return lambdaIndex
-  }, {}),
-})
+const indexFunctionGraphs = (ws) =>
+  ws.functions.reduce((idx, fn) => {
+    const id = `${ws.id}/${fn.name}`
+    idx[id] = {
+      // Common function description
+      id,
+      name: fn.name,
+      description: fn.description,
+      graphqlOperationType: fn.graphqlOperationType,
+      input: fn.arguments.reduce((args, arg) => {
+        args[arg.name] = {
+          name: arg.name,
+          kind: arg.type === 'KIND' ? arg.kind.name : arg.type,
+          modifiers: arg.modifiers,
+        }
+        return args
+      }, {}),
+      output: {
+        kind: fn.outputType === 'KIND' ? fn.kind.name : fn.outputType,
+        modifiers: fn.outputModifiers,
+      },
+      // Graph-specific
+      type: FnTypeEnum.Graph,
+      ops: fn.implementation.operations.reduce((ops, op) => {
+        ops[op.id] = op
+        return ops
+      }, {}),
+    }
+    return idx
+  }, {})
 
-const indexWorkspace = (state) =>
-  compose(indexServices, indexKinds, indexFunctions)(state)
+const indexServices = async (ws) =>
+  await ws.services.reduce(async (idx, svc) => {
+    const remoteSchema = await getRemoteSchema(svc.endpointUrl)
+    const clientSchema = buildClientSchema(remoteSchema.data)
+
+    const indexType = (idx, type, graphqlOperationType) => {
+      const id = `${svc.id}/${type.name}`
+      idx[id] = {
+        // Common function description
+        id,
+        name: type.name,
+        description: type.description,
+        graphqlOperationType,
+        input: type.args.reduce((args, arg) => {
+          args[arg.name] = {
+            name: arg.name,
+            description: arg.description,
+            ...graphQLTypeRefToKind(arg.type),
+          }
+          return args
+        }, {}),
+        output: {
+          ...graphQLTypeRefToKind(type.type),
+        },
+        // Remote-specific
+        endpointUrl: svc.endpointUrl,
+      }
+    }
+
+    idx = Object.values(clientSchema._queryType._fields).reduce((idx, type) => {
+      indexType(idx, type, 'QUERY')
+      return idx
+    }, idx)
+
+    idx = Object.values(clientSchema._mutationType._fields).reduce(
+      (idx, type) => {
+        indexType(idx, type, 'MUTATION')
+        return idx
+      },
+      idx
+    )
+
+    return idx
+  }, {})
+
+const indexFunctions = async (ws) => {
+  const fnGraphIdx = indexFunctionGraphs(ws)
+  const lambdaIdx = indexLambdas(ws)
+  const serviceIdx = await indexServices(ws)
+  const functionIdx = [fnGraphIdx, lambdaIdx, serviceIdx].reduce(
+    (idx, cur) =>
+      Object.values(cur).reduce((idx, fn) => {
+        idx[fn.id] = fn
+        return idx
+      }, {}),
+    {}
+  )
+  return {
+    fnGraphIdx,
+    lambdaIdx,
+    serviceIdx,
+    functionIdx,
+  }
+}
+
+const indexWorkspace = async (ws) => ({
+  ...(await indexFunctions(ws)),
+  kindIdx: indexKinds(ws.kinds),
+})
 
 // ---
 
@@ -123,9 +247,10 @@ const kindToGraphQLObject = (state, kind, isInput) => {
           acc[cur.name] = {
             type: kindToGraphQLType(
               state,
-              cur.type,
-              cur.typeKindId,
-              cur.modifiers,
+              {
+                kind: cur.type === 'KIND' ? cur.kind.name : cur.type,
+                modifiers: cur.modifiers,
+              },
               isInput
             ),
           }
@@ -140,18 +265,14 @@ const kindToGraphQLObject = (state, kind, isInput) => {
   return cache[kind.id]
 }
 
-const kindToGraphQLType = (state, type, kindId, modifiers, isInput) => {
-  let base
-  if (type !== 'KIND') {
-    base = ScalarToGraphQLObject[type]
-    if (!base) throw new Error(`Unknown scalar: ${type}`)
-  } else if (kindId) {
-    const kind = state.kindIndex[kindId]
-    base = kindToGraphQLObject(state, kind, isInput)
-    if (!base) throw new Error(`Unknown kind: ${kindId}`)
-  } else {
-    throw new Error(`Either 'type' or 'kind' must be supplied`)
+const kindToGraphQLType = (state, { kind, modifiers }, isInput) => {
+  let base = ScalarToGraphQLObject[kind]
+  if (!base) {
+    const kindDef = state.kindIdx[kind]
+    base = kindToGraphQLObject(state, kindDef, isInput)
+    if (!base) throw new Error(`Unknown kind: ${kind}`)
   }
+
   if (modifiers.includes('LIST')) {
     return new GraphQLNonNull(GraphQLList(new GraphQLNonNull(base)))
   } else if (modifiers.includes('NONULL')) {
@@ -162,27 +283,33 @@ const kindToGraphQLType = (state, type, kindId, modifiers, isInput) => {
 
 const fnToGraphQLField = (state, fn) => {
   const field = {
-    type: kindToGraphQLType(
-      state,
-      fn.outputType,
-      fn.outputKindId,
-      fn.outputModifiers
-    ),
+    type: kindToGraphQLType(state, fn.output),
     description: fn.description,
-    args: fn.arguments.reduce((args, arg) => {
+    args: Object.values(fn.input).reduce((args, arg) => {
       args[arg.name] = {
-        type: kindToGraphQLType(
-          state,
-          arg.type,
-          arg.typeKindId,
-          arg.modifiers,
-          true
-        ),
+        type: kindToGraphQLType(state, arg, true),
       }
       return args
     }, {}),
   }
   return field
+}
+
+const graphQLTypeRefToKind = (graphQLTypeRef) => {
+  let modifiers = []
+  if (isNonNullType(graphQLTypeRef)) {
+    modifiers.push('NONULL')
+    const innerType = getNullableType(graphQLTypeRef)
+    if (isListType(innerType)) {
+      modifiers.push('LIST')
+    }
+  } else if (isListType(graphQLTypeRef)) {
+    modifiers.push('LIST')
+  }
+  return {
+    kind: getNamedType(graphQLTypeRef),
+    modifiers,
+  }
 }
 
 // ---
@@ -205,19 +332,15 @@ const buildSchema = (state) => {
   }
   const mutations = {}
 
-  state.ws.functions.forEach((fn) => {
-    if (fn.functionType === 'CKG') {
-      if (fn.graphqlOperationType === 'QUERY') {
-        queries[fn.name] = fnToGraphQLField(state, fn)
-      } else if (fn.graphqlOperationType === 'MUTATION') {
-        mutations[fn.name] = fnToGraphQLField(state, fn)
-      } else {
-        throw new Error(
-          `Unknown GraphQL operation type: ${fn.graphqlOperationType}`
-        )
-      }
+  Object.values(state.fnGraphIdx).forEach((fn) => {
+    if (fn.graphqlOperationType === 'QUERY') {
+      queries[fn.name] = fnToGraphQLField(state, fn)
+    } else if (fn.graphqlOperationType === 'MUTATION') {
+      mutations[fn.name] = fnToGraphQLField(state, fn)
     } else {
-      throw new Error(`Unknown functionType: ${fn.functionType}`)
+      throw new Error(
+        `Unknown GraphQL operation type: ${fn.graphqlOperationType}`
+      )
     }
   })
 
@@ -437,12 +560,14 @@ const buildResolvers = (state) => {
     [RootTypeEnum.Mutation]: {},
   }
 
-  state.ws.functions.reduce((acc, fn) => {
+  Object.values(state.fnGraphIdx).reduce((acc, fn) => {
+    console.log(fn)
     acc[
       fn.graphqlOperationType === 'QUERY'
         ? RootTypeEnum.Query
         : RootTypeEnum.Mutation
-    ][fn.name] = buildResolver(state, fn)
+    ][fn.name] = (root, args, context) =>
+      runFnGraph(state, fn, root, args, context)
     return acc
   }, resolvers)
 
@@ -452,28 +577,6 @@ const buildResolvers = (state) => {
 
 // ---
 
-const harvestFunctions = (ws) => {
-  const fns = ws.functions.reduce((fnIndex, fn) => {
-    fnIndex[fn.id] = fn
-    return fn.implementation.operations.reduce((fnIndex, op) => {
-      fnIndex[op.id] = op
-      return fnIndex
-    }, fnIndex)
-  }, {})
-  return fns
-}
-
-const getRemoteSchema = async (endpointUrl) => {
-  const fetchResult = await fetch(endpointUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ query: getIntrospectionQuery() }),
-  })
-  return fetchResult.json()
-}
-
 export const createHost = async (ws) => {
   let state = {
     ws,
@@ -482,18 +585,10 @@ export const createHost = async (ws) => {
     inputKinds: {},
     outputKinds: {},
     resultsCache: new LRU(),
+    ...(await indexWorkspace(ws)),
   }
 
-  // const remoteSchema = await getRemoteSchema(ws.services[0].endpointUrl)
-  // console.log(remoteSchema)
-
-  // const fnIndex = harvestFunctions(ws)
-  // Object.values(fnIndex).forEach((fn) => {
-  //   console.log()
-  // })
-  // process.exit(-1)
-
-  state = compose(indexWorkspace, buildSchema, buildResolvers)(state)
+  state = compose(buildSchema, buildResolvers)(state)
 
   state.schema = addResolversToSchema({
     schema: state.schemaOnly,

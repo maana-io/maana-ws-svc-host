@@ -7,19 +7,14 @@
       "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
       "name": "Buzz",
       "description": "",
-      "service": {
-        "id": "donald-simple",
-        "name": "Simple"
-      },
+      "service": { "id": "donald-simple", "name": "Simple" },
       "schema": [
         {
           "id": "6d42f0dc-ca18-4159-abe3-9cb1ec1a9884",
           "name": "id",
           "type": "ID",
           "typeKindId": "",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "kind": null
         },
         {
@@ -37,19 +32,14 @@
       "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
       "name": "Fizz",
       "description": "",
-      "service": {
-        "id": "donald-simple",
-        "name": "Simple"
-      },
+      "service": { "id": "donald-simple", "name": "Simple" },
       "schema": [
         {
           "id": "8932df86-3f5b-4527-8398-5ae585739ab6",
           "name": "id",
           "type": "ID",
           "typeKindId": "",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "kind": null
         },
         {
@@ -57,9 +47,7 @@
           "name": "createdOn",
           "type": "DATETIME",
           "typeKindId": "",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "kind": null
         },
         {
@@ -67,17 +55,49 @@
           "name": "buzz",
           "type": "KIND",
           "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "kind": {
             "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
             "name": "Buzz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            }
+            "service": { "id": "donald-simple", "name": "Simple" }
           }
+        },
+        {
+          "id": "3a27ae7d-7b86-4a39-bee0-2ac2c69ec68f",
+          "name": "person",
+          "type": "KIND",
+          "typeKindId": "123ce0ab-fe3e-4cbc-a047-adba802b74d4",
+          "modifiers": ["NONULL"],
+          "kind": {
+            "id": "123ce0ab-fe3e-4cbc-a047-adba802b74d4",
+            "name": "Person",
+            "service": { "id": "donald-simple", "name": "Simple" }
+          }
+        }
+      ],
+      "data": []
+    },
+    {
+      "id": "123ce0ab-fe3e-4cbc-a047-adba802b74d4",
+      "name": "Person",
+      "description": "",
+      "service": { "id": "donald-simple", "name": "Simple" },
+      "schema": [
+        {
+          "id": "806e712d-42ef-4874-810b-72ef317c1586",
+          "name": "id",
+          "type": "ID",
+          "typeKindId": "",
+          "modifiers": ["NONULL"],
+          "kind": null
+        },
+        {
+          "id": "e769cb76-1eaf-4710-906b-221a6e662008",
+          "name": "name",
+          "type": "STRING",
+          "typeKindId": "",
+          "modifiers": ["NONULL"],
+          "kind": null
         }
       ],
       "data": []
@@ -88,18 +108,13 @@
       "id": "dcc895b8-2610-4af4-bc9e-cf1d0c1f4c77",
       "name": "qux",
       "description": null,
-      "service": {
-        "id": "donald-simple",
-        "name": "Simple"
-      },
+      "service": { "id": "donald-simple", "name": "Simple" },
       "arguments": [
         {
           "id": "f98555ca-bddf-4e6c-9d84-a8640ff1f9fd",
           "name": "bar",
           "type": "STRING",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": null,
           "kind": null
         },
@@ -107,18 +122,14 @@
           "id": "0850d45d-a37c-4138-bfea-9f98ef5ccb23",
           "name": "baz",
           "type": "STRING",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": null,
           "kind": null
         }
       ],
       "implementation": {
         "id": "993976f7-c389-49e1-ac3e-50f265272092",
-        "entrypoint": {
-          "id": "a9a2a713-58c9-4618-b54c-5e1ab98f5c71"
-        },
+        "entrypoint": { "id": "a9a2a713-58c9-4618-b54c-5e1ab98f5c71" },
         "operations": [
           {
             "id": "a9a2a713-58c9-4618-b54c-5e1ab98f5c71",
@@ -164,9 +175,7 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -201,34 +210,24 @@
       "id": "f885d013-14ce-4330-abe2-08d2c51db7dd",
       "name": "foo",
       "description": null,
-      "service": {
-        "id": "donald-simple",
-        "name": "Simple"
-      },
+      "service": { "id": "donald-simple", "name": "Simple" },
       "arguments": [
         {
           "id": "c47a781c-4b04-4886-ae95-d90d5006a157",
           "name": "fizz",
           "type": "KIND",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
           "kind": {
             "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
             "name": "Fizz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            }
+            "service": { "id": "donald-simple", "name": "Simple" }
           }
         }
       ],
       "implementation": {
         "id": "b40ecf5c-cebe-48f2-95d5-98c48a74640e",
-        "entrypoint": {
-          "id": "e0d41c8b-6683-4d77-bd2f-4950635b00a8"
-        },
+        "entrypoint": { "id": "3ffcc3fa-7a0c-491c-8881-cea851cf5dc7" },
         "operations": [
           {
             "id": "aa6b3db7-998f-4596-a3bc-454eec76b42c",
@@ -236,10 +235,7 @@
             "function": {
               "id": "271eba2f-4850-441c-b744-fd80c5932589",
               "name": "bar",
-              "service": {
-                "id": "donald-simple",
-                "name": "Simple"
-              }
+              "service": { "id": "donald-simple", "name": "Simple" }
             },
             "argumentValues": [
               {
@@ -248,9 +244,7 @@
                   "id": "af204d08-99a3-47eb-bcd6-00cb1a9a6c64",
                   "name": "dateTime"
                 },
-                "operation": {
-                  "id": "81afe2bb-d0eb-4fd4-8cc2-120a7f07c5be"
-                },
+                "operation": { "id": "81afe2bb-d0eb-4fd4-8cc2-120a7f07c5be" },
                 "argumentRef": null
               }
             ]
@@ -261,10 +255,7 @@
             "function": {
               "id": "dcc895b8-2610-4af4-bc9e-cf1d0c1f4c77",
               "name": "qux",
-              "service": {
-                "id": "donald-simple",
-                "name": "Simple"
-              }
+              "service": { "id": "donald-simple", "name": "Simple" }
             },
             "argumentValues": [
               {
@@ -273,9 +264,7 @@
                   "id": "f98555ca-bddf-4e6c-9d84-a8640ff1f9fd",
                   "name": "bar"
                 },
-                "operation": {
-                  "id": "aa6b3db7-998f-4596-a3bc-454eec76b42c"
-                },
+                "operation": { "id": "aa6b3db7-998f-4596-a3bc-454eec76b42c" },
                 "argumentRef": null
               },
               {
@@ -284,9 +273,7 @@
                   "id": "0850d45d-a37c-4138-bfea-9f98ef5ccb23",
                   "name": "baz"
                 },
-                "operation": {
-                  "id": "d4839341-f552-45ed-bf1a-20ec0c249ed4"
-                },
+                "operation": { "id": "d4839341-f552-45ed-bf1a-20ec0c249ed4" },
                 "argumentRef": null
               }
             ]
@@ -297,10 +284,7 @@
             "function": {
               "id": "2d9c394c-614e-4876-8334-c35238657cc9_projector",
               "name": "projectBuzzFromFizz",
-              "service": {
-                "id": "donald-simple",
-                "name": "Simple"
-              }
+              "service": { "id": "donald-simple", "name": "Simple" }
             },
             "argumentValues": [
               {
@@ -323,10 +307,7 @@
             "function": {
               "id": "a35d961a-9cab-43e7-a991-e4a2fc350294_projector",
               "name": "projectCreatedOnFromFizz",
-              "service": {
-                "id": "donald-simple",
-                "name": "Simple"
-              }
+              "service": { "id": "donald-simple", "name": "Simple" }
             },
             "argumentValues": [
               {
@@ -349,10 +330,7 @@
             "function": {
               "id": "5276ddea-26b7-4686-bd5b-c310564cdd63",
               "name": "baz",
-              "service": {
-                "id": "donald-simple",
-                "name": "Simple"
-              }
+              "service": { "id": "donald-simple", "name": "Simple" }
             },
             "argumentValues": [
               {
@@ -361,9 +339,99 @@
                   "id": "d93689cb-5665-47ef-94ff-f447c373ae3a",
                   "name": "buzz"
                 },
-                "operation": {
-                  "id": "9898acbe-c831-427a-9b90-f72ff7d19a35"
+                "operation": { "id": "9898acbe-c831-427a-9b90-f72ff7d19a35" },
+                "argumentRef": null
+              }
+            ]
+          },
+          {
+            "id": "bc7b15c0-398d-4347-a67b-0d088c0d761f",
+            "type": "APPLY",
+            "function": {
+              "id": "3a27ae7d-7b86-4a39-bee0-2ac2c69ec68f_projector",
+              "name": "projectPersonFromFizz",
+              "service": { "id": "donald-simple", "name": "Simple" }
+            },
+            "argumentValues": [
+              {
+                "id": "01381f9e-ff1d-4ecf-b30e-32472f0f130f",
+                "argument": {
+                  "id": "542dcc23-7133-4c01-ab8a-365e02db21f7",
+                  "name": "fizz"
                 },
+                "operation": null,
+                "argumentRef": {
+                  "id": "c47a781c-4b04-4886-ae95-d90d5006a157",
+                  "name": "fizz"
+                }
+              }
+            ]
+          },
+          {
+            "id": "3ffcc3fa-7a0c-491c-8881-cea851cf5dc7",
+            "type": "APPLY",
+            "function": {
+              "id": "11202148-f939-4c08-8535-ca1e0da453b3",
+              "name": "stringConcat",
+              "service": { "id": "io.maana.scalars", "name": "Maana Scalars" }
+            },
+            "argumentValues": [
+              {
+                "id": "53f5de4e-4a71-4740-aad3-211475e62efb",
+                "argument": {
+                  "id": "f4d3e3e3-e490-49b4-b0a1-eb8d5ddca662",
+                  "name": "a"
+                },
+                "operation": { "id": "e0d41c8b-6683-4d77-bd2f-4950635b00a8" },
+                "argumentRef": null
+              },
+              {
+                "id": "b1e39e98-4128-4d40-9402-9a66aedfda57",
+                "argument": {
+                  "id": "a0069902-d8b2-4499-8f20-ae488e12fe9a",
+                  "name": "b"
+                },
+                "operation": { "id": "e7217ec7-9cf8-4cad-b4e0-ec187ab2e7db" },
+                "argumentRef": null
+              }
+            ]
+          },
+          {
+            "id": "76ad4665-1ce6-4013-9f7e-d043bbb871ed",
+            "type": "APPLY",
+            "function": {
+              "id": "d5b61fce-a950-4cae-920b-63715c6e8967",
+              "name": "freePerson",
+              "service": { "id": "donald-simple", "name": "Simple" }
+            },
+            "argumentValues": [
+              {
+                "id": "9e1c10fd-41a2-447c-a688-1a818811cc48",
+                "argument": {
+                  "id": "b6a8ad8c-6cc4-460b-b44a-f11621bb6d35",
+                  "name": "person"
+                },
+                "operation": { "id": "bc7b15c0-398d-4347-a67b-0d088c0d761f" },
+                "argumentRef": null
+              }
+            ]
+          },
+          {
+            "id": "e7217ec7-9cf8-4cad-b4e0-ec187ab2e7db",
+            "type": "APPLY",
+            "function": {
+              "id": "5ee3f22f-81e0-4ab7-bb1a-12afa6c4733b_projector",
+              "name": "projectNameFromPerson",
+              "service": { "id": "donald-simple", "name": "Simple" }
+            },
+            "argumentValues": [
+              {
+                "id": "969753eb-2206-456d-a4d4-6a820a83c7d0",
+                "argument": {
+                  "id": "6da451a4-3705-47cf-a2ab-f26b57857755",
+                  "name": "person"
+                },
+                "operation": { "id": "76ad4665-1ce6-4013-9f7e-d043bbb871ed" },
                 "argumentRef": null
               }
             ]
@@ -374,14 +442,12 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
-        "offsetX": -58,
-        "offsetY": 100,
+        "offsetX": 6,
+        "offsetY": 98,
         "nodes": [
           {
             "id": "1b246bce-b266-4423-82f8-d45518e8e6c7INPUT",
@@ -392,8 +458,8 @@
           },
           {
             "id": "c7d16309-b728-4777-9965-de818b121ca7OUTPUT",
-            "x": 928,
-            "y": 96,
+            "x": 1216,
+            "y": 192,
             "collapsed": false,
             "operationId": null
           },
@@ -431,6 +497,34 @@
             "y": 192,
             "collapsed": false,
             "operationId": "d4839341-f552-45ed-bf1a-20ec0c249ed4"
+          },
+          {
+            "id": "2e6084b0-eae7-4e84-9bb0-1a38ba1f039d",
+            "x": 256,
+            "y": 352,
+            "collapsed": false,
+            "operationId": "bc7b15c0-398d-4347-a67b-0d088c0d761f"
+          },
+          {
+            "id": "d0d46e11-17e8-4e30-94a4-9ac88986ad85",
+            "x": 992,
+            "y": 192,
+            "collapsed": false,
+            "operationId": "3ffcc3fa-7a0c-491c-8881-cea851cf5dc7"
+          },
+          {
+            "id": "f39fcad2-ace5-4fb7-8a95-220131337c11",
+            "x": 512,
+            "y": 352,
+            "collapsed": false,
+            "operationId": "76ad4665-1ce6-4013-9f7e-d043bbb871ed"
+          },
+          {
+            "id": "89db3cc7-d29e-4a2d-81b4-17eca8651414",
+            "x": 736,
+            "y": 352,
+            "collapsed": false,
+            "operationId": "e7217ec7-9cf8-4cad-b4e0-ec187ab2e7db"
           }
         ]
       }
@@ -439,27 +533,20 @@
       "id": "271eba2f-4850-441c-b744-fd80c5932589",
       "name": "bar",
       "description": null,
-      "service": {
-        "id": "donald-simple",
-        "name": "Simple"
-      },
+      "service": { "id": "donald-simple", "name": "Simple" },
       "arguments": [
         {
           "id": "af204d08-99a3-47eb-bcd6-00cb1a9a6c64",
           "name": "dateTime",
           "type": "DATETIME",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": null,
           "kind": null
         }
       ],
       "implementation": {
         "id": "3f2f5d26-ae04-46f5-9b7c-938df330fc9b",
-        "entrypoint": {
-          "id": "ac63270e-0ab0-4498-a58e-b26324d4621d"
-        },
+        "entrypoint": { "id": "ac63270e-0ab0-4498-a58e-b26324d4621d" },
         "operations": [
           {
             "id": "ac63270e-0ab0-4498-a58e-b26324d4621d",
@@ -467,10 +554,7 @@
             "function": {
               "id": "062c71d5-1855-4d85-89a0-18956dbc9a02",
               "name": "dateTimeToString",
-              "service": {
-                "id": "io.maana.scalars",
-                "name": "Maana Scalars"
-              }
+              "service": { "id": "io.maana.scalars", "name": "Maana Scalars" }
             },
             "argumentValues": [
               {
@@ -493,9 +577,7 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -530,37 +612,27 @@
       "id": "2d9c394c-614e-4876-8334-c35238657cc9_projector",
       "name": "projectBuzzFromFizz",
       "description": null,
-      "service": {
-        "id": "donald-simple",
-        "name": "Simple"
-      },
+      "service": { "id": "donald-simple", "name": "Simple" },
       "arguments": [
         {
           "id": "b69063f3-d088-4650-84dd-a570a9600cef",
           "name": "fizz",
           "type": "KIND",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
           "kind": {
             "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
             "name": "Fizz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            }
+            "service": { "id": "donald-simple", "name": "Simple" }
           }
         }
       ],
       "implementation": {
         "id": "48770928-8bfd-4a2d-98f5-99f8a1d653d6",
-        "entrypoint": {
-          "id": "b8e7f2ce-c580-480a-91c1-f6622ffd9e1b"
-        },
+        "entrypoint": { "id": "b202ce6e-804c-4ba6-a968-107e7306fc54" },
         "operations": [
           {
-            "id": "b8e7f2ce-c580-480a-91c1-f6622ffd9e1b",
+            "id": "b202ce6e-804c-4ba6-a968-107e7306fc54",
             "type": "APPLY",
             "function": {
               "id": "48dbc49e-980d-4644-a105-9f868efdc55e",
@@ -572,7 +644,7 @@
             },
             "argumentValues": [
               {
-                "id": "50005d18-6adb-4635-af07-c28c22d205a9",
+                "id": "4c222190-2764-4b26-9e20-0b0dc467597f",
                 "argument": {
                   "id": "97a26f1b-6def-4aae-851e-3bde5f08a308",
                   "name": "fizz"
@@ -591,16 +663,11 @@
       "graphqlOperationType": "QUERY",
       "outputType": "KIND",
       "outputKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": {
         "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
         "name": "Buzz",
-        "service": {
-          "id": "donald-simple",
-          "name": "Simple"
-        }
+        "service": { "id": "donald-simple", "name": "Simple" }
       },
       "graph": {
         "zoom": 100,
@@ -622,11 +689,11 @@
             "operationId": null
           },
           {
-            "id": "2a5e1859-2ce3-4bac-b4be-1a1ce7f52a8b",
+            "id": "c1461b45-986a-4767-9889-b52e5c31cd21",
             "x": 25,
             "y": 25,
             "collapsed": false,
-            "operationId": "b8e7f2ce-c580-480a-91c1-f6622ffd9e1b"
+            "operationId": "b202ce6e-804c-4ba6-a968-107e7306fc54"
           }
         ]
       }
@@ -635,10 +702,7 @@
       "id": "bfc15d43-df5a-42f1-923f-d3b2ec1e8dc1",
       "name": "jsonToString",
       "description": null,
-      "service": {
-        "id": "donald-simple",
-        "name": "Simple"
-      },
+      "service": { "id": "donald-simple", "name": "Simple" },
       "arguments": [
         {
           "id": "68f5573a-e190-4786-9ee1-c65a019126d9",
@@ -651,9 +715,7 @@
       ],
       "implementation": {
         "id": "9a942b04-bb21-4aa1-b131-56bf25b27b03",
-        "entrypoint": {
-          "id": "af18f9f7-7aac-4c3e-b5e5-70bb2543b549"
-        },
+        "entrypoint": { "id": "af18f9f7-7aac-4c3e-b5e5-70bb2543b549" },
         "operations": [
           {
             "id": "af18f9f7-7aac-4c3e-b5e5-70bb2543b549",
@@ -687,9 +749,7 @@
       "graphqlOperationType": "QUERY",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -724,34 +784,24 @@
       "id": "5276ddea-26b7-4686-bd5b-c310564cdd63",
       "name": "baz",
       "description": null,
-      "service": {
-        "id": "donald-simple",
-        "name": "Simple"
-      },
+      "service": { "id": "donald-simple", "name": "Simple" },
       "arguments": [
         {
           "id": "d93689cb-5665-47ef-94ff-f447c373ae3a",
           "name": "buzz",
           "type": "KIND",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
           "kind": {
             "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
             "name": "Buzz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            }
+            "service": { "id": "donald-simple", "name": "Simple" }
           }
         }
       ],
       "implementation": {
         "id": "b02d8a01-7b32-4602-b542-0117ffc7c081",
-        "entrypoint": {
-          "id": "93ccd68b-5983-478b-9586-716d19f1ae02"
-        },
+        "entrypoint": { "id": "93ccd68b-5983-478b-9586-716d19f1ae02" },
         "operations": [
           {
             "id": "caf8a712-fb82-4e25-aa2f-64a55516fada",
@@ -759,10 +809,7 @@
             "function": {
               "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384_projector",
               "name": "projectJsonFromBuzz",
-              "service": {
-                "id": "donald-simple",
-                "name": "Simple"
-              }
+              "service": { "id": "donald-simple", "name": "Simple" }
             },
             "argumentValues": [
               {
@@ -785,10 +832,7 @@
             "function": {
               "id": "bfc15d43-df5a-42f1-923f-d3b2ec1e8dc1",
               "name": "jsonToString",
-              "service": {
-                "id": "donald-simple",
-                "name": "Simple"
-              }
+              "service": { "id": "donald-simple", "name": "Simple" }
             },
             "argumentValues": [
               {
@@ -797,9 +841,7 @@
                   "id": "68f5573a-e190-4786-9ee1-c65a019126d9",
                   "name": "json"
                 },
-                "operation": {
-                  "id": "caf8a712-fb82-4e25-aa2f-64a55516fada"
-                },
+                "operation": { "id": "caf8a712-fb82-4e25-aa2f-64a55516fada" },
                 "argumentRef": null
               }
             ]
@@ -810,10 +852,7 @@
             "function": {
               "id": "3ae44a87-0bb7-42b1-ab6a-659d28dfbcdf",
               "name": "jsonToString",
-              "service": {
-                "id": "io.maana.scalars",
-                "name": "Maana Scalars"
-              }
+              "service": { "id": "io.maana.scalars", "name": "Maana Scalars" }
             },
             "argumentValues": [
               {
@@ -822,9 +861,7 @@
                   "id": "4b39bcae-b3d5-4c0c-833b-168f3fe370c6",
                   "name": "x"
                 },
-                "operation": {
-                  "id": "6cb59261-dd73-4779-8f52-3c0e43171d5c"
-                },
+                "operation": { "id": "6cb59261-dd73-4779-8f52-3c0e43171d5c" },
                 "argumentRef": null
               }
             ]
@@ -835,10 +872,7 @@
             "function": {
               "id": "4142d727-ae2b-4ea2-a753-541c9523beeb",
               "name": "jsonCoerceFromOpt",
-              "service": {
-                "id": "io.maana.scalars",
-                "name": "Maana Scalars"
-              }
+              "service": { "id": "io.maana.scalars", "name": "Maana Scalars" }
             },
             "argumentValues": [
               {
@@ -847,9 +881,7 @@
                   "id": "4fc96a53-9ffd-4f8b-8b90-444578ba12c6",
                   "name": "x"
                 },
-                "operation": {
-                  "id": "caf8a712-fb82-4e25-aa2f-64a55516fada"
-                },
+                "operation": { "id": "caf8a712-fb82-4e25-aa2f-64a55516fada" },
                 "argumentRef": null
               }
             ]
@@ -860,10 +892,7 @@
             "function": {
               "id": "11202148-f939-4c08-8535-ca1e0da453b3",
               "name": "stringConcat",
-              "service": {
-                "id": "io.maana.scalars",
-                "name": "Maana Scalars"
-              }
+              "service": { "id": "io.maana.scalars", "name": "Maana Scalars" }
             },
             "argumentValues": [
               {
@@ -872,9 +901,7 @@
                   "id": "a0069902-d8b2-4499-8f20-ae488e12fe9a",
                   "name": "b"
                 },
-                "operation": {
-                  "id": "679f060b-76cf-4607-b61a-27fc86339c61"
-                },
+                "operation": { "id": "679f060b-76cf-4607-b61a-27fc86339c61" },
                 "argumentRef": null
               },
               {
@@ -883,9 +910,7 @@
                   "id": "f4d3e3e3-e490-49b4-b0a1-eb8d5ddca662",
                   "name": "a"
                 },
-                "operation": {
-                  "id": "5091ef07-9045-4066-b4e8-457658723261"
-                },
+                "operation": { "id": "5091ef07-9045-4066-b4e8-457658723261" },
                 "argumentRef": null
               }
             ]
@@ -896,9 +921,7 @@
       "graphqlOperationType": "MUTATION",
       "outputType": "STRING",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -958,40 +981,120 @@
       }
     },
     {
+      "id": "d5b61fce-a950-4cae-920b-63715c6e8967",
+      "name": "freePerson",
+      "description": null,
+      "service": { "id": "donald-simple", "name": "Simple" },
+      "arguments": [
+        {
+          "id": "b6a8ad8c-6cc4-460b-b44a-f11621bb6d35",
+          "name": "person",
+          "type": "KIND",
+          "modifiers": ["NONULL"],
+          "typeKindId": "123ce0ab-fe3e-4cbc-a047-adba802b74d4",
+          "kind": {
+            "id": "123ce0ab-fe3e-4cbc-a047-adba802b74d4",
+            "name": "Person",
+            "service": { "id": "donald-simple", "name": "Simple" }
+          }
+        }
+      ],
+      "implementation": {
+        "id": "a0213e8b-dcc8-4a01-a0aa-9f12bb969bc4",
+        "entrypoint": { "id": "39f7c7fb-393b-4b02-8d15-924e99f4d98a" },
+        "operations": [
+          {
+            "id": "39f7c7fb-393b-4b02-8d15-924e99f4d98a",
+            "type": "APPLY",
+            "function": {
+              "id": "c7194986-e998-4c1b-afd5-0afd1dc186ec",
+              "name": "freePerson",
+              "service": {
+                "id": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda",
+                "name": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "a724ea64-9c55-4a0a-8462-c2b1e2b30816",
+                "argument": {
+                  "id": "c70d8e8d-1267-41d5-82d8-8fe023e925bc",
+                  "name": "person"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "b6a8ad8c-6cc4-460b-b44a-f11621bb6d35",
+                  "name": "person"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "QUERY",
+      "outputType": "KIND",
+      "outputKindId": "e0697c99-eeb6-4a12-8e9c-caf5b15bc798",
+      "outputModifiers": ["NONULL"],
+      "kind": {
+        "id": "e0697c99-eeb6-4a12-8e9c-caf5b15bc798",
+        "name": "Person",
+        "service": { "id": "io.maana.q.common", "name": "Maana Common" }
+      },
+      "graph": {
+        "zoom": 100,
+        "offsetX": 0,
+        "offsetY": 0,
+        "nodes": [
+          {
+            "id": "e1d47244-f7fc-43cc-a933-8f594cec3023INPUT",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "c4d9d6c8-a418-4123-ac3a-2e85e79b78b1OUTPUT",
+            "x": 450,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "0684afa4-01d0-45f0-a10c-371b9495e777",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": "39f7c7fb-393b-4b02-8d15-924e99f4d98a"
+          }
+        ]
+      }
+    },
+    {
       "id": "a35d961a-9cab-43e7-a991-e4a2fc350294_projector",
       "name": "projectCreatedOnFromFizz",
       "description": null,
-      "service": {
-        "id": "donald-simple",
-        "name": "Simple"
-      },
+      "service": { "id": "donald-simple", "name": "Simple" },
       "arguments": [
         {
           "id": "23cfa4c7-aebd-45ad-b3cc-b2a4c6a90d9a",
           "name": "fizz",
           "type": "KIND",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
           "kind": {
             "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
             "name": "Fizz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            }
+            "service": { "id": "donald-simple", "name": "Simple" }
           }
         }
       ],
       "implementation": {
         "id": "2a01352e-3787-4f05-b31e-05abbd0d8909",
-        "entrypoint": {
-          "id": "bd1ea3b9-eed2-4a02-8bf5-36bc74ae3855"
-        },
+        "entrypoint": { "id": "76177181-e06f-4aef-a5f7-70fd0add4367" },
         "operations": [
           {
-            "id": "bd1ea3b9-eed2-4a02-8bf5-36bc74ae3855",
+            "id": "76177181-e06f-4aef-a5f7-70fd0add4367",
             "type": "APPLY",
             "function": {
               "id": "a6029d08-8bfd-461e-8948-e986bbad9360",
@@ -1003,7 +1106,7 @@
             },
             "argumentValues": [
               {
-                "id": "b52a11a2-d7f2-4f0e-960b-37f9e2101748",
+                "id": "ebeabbdc-cc75-4b46-9361-bd43ab51c0bd",
                 "argument": {
                   "id": "803e9587-5c59-4cfe-9be6-045e052818ed",
                   "name": "fizz"
@@ -1022,9 +1125,7 @@
       "graphqlOperationType": "QUERY",
       "outputType": "DATETIME",
       "outputKindId": null,
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kind": null,
       "graph": {
         "zoom": 100,
@@ -1046,11 +1147,187 @@
             "operationId": null
           },
           {
-            "id": "71c1bc2a-1246-4c7e-b31c-e03ae4a7ba29",
+            "id": "64d4ceeb-89ee-49cb-8e19-8700b479461e",
             "x": 25,
             "y": 25,
             "collapsed": false,
-            "operationId": "bd1ea3b9-eed2-4a02-8bf5-36bc74ae3855"
+            "operationId": "76177181-e06f-4aef-a5f7-70fd0add4367"
+          }
+        ]
+      }
+    },
+    {
+      "id": "3a27ae7d-7b86-4a39-bee0-2ac2c69ec68f_projector",
+      "name": "projectPersonFromFizz",
+      "description": null,
+      "service": { "id": "donald-simple", "name": "Simple" },
+      "arguments": [
+        {
+          "id": "542dcc23-7133-4c01-ab8a-365e02db21f7",
+          "name": "fizz",
+          "type": "KIND",
+          "modifiers": ["NONULL"],
+          "typeKindId": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
+          "kind": {
+            "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
+            "name": "Fizz",
+            "service": { "id": "donald-simple", "name": "Simple" }
+          }
+        }
+      ],
+      "implementation": {
+        "id": "71c86bf8-b8fa-4620-90d8-1df8afc7449c",
+        "entrypoint": { "id": "5a203ec6-1011-4cb9-aed1-487f268cd2be" },
+        "operations": [
+          {
+            "id": "5a203ec6-1011-4cb9-aed1-487f268cd2be",
+            "type": "APPLY",
+            "function": {
+              "id": "cf587c2a-a1ea-46cb-bd08-8e0b9e6d9d28",
+              "name": "projectPersonFromFizz",
+              "service": {
+                "id": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda",
+                "name": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "5db16d58-0f2c-4e77-b958-5219e531f5df",
+                "argument": {
+                  "id": "ee864e84-44dd-4180-9b62-d3ca1b2d413e",
+                  "name": "fizz"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "542dcc23-7133-4c01-ab8a-365e02db21f7",
+                  "name": "fizz"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "QUERY",
+      "outputType": "KIND",
+      "outputKindId": "123ce0ab-fe3e-4cbc-a047-adba802b74d4",
+      "outputModifiers": ["NONULL"],
+      "kind": {
+        "id": "123ce0ab-fe3e-4cbc-a047-adba802b74d4",
+        "name": "Person",
+        "service": { "id": "donald-simple", "name": "Simple" }
+      },
+      "graph": {
+        "zoom": 100,
+        "offsetX": 0,
+        "offsetY": 0,
+        "nodes": [
+          {
+            "id": "b047a901-e87b-4f5d-9ba8-0b36a26fde19INPUT",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "c62f406b-618f-4fdd-995d-38831ea77693OUTPUT",
+            "x": 450,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "5abdd40d-6a04-4861-bd7c-4545e2d77d8c",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": "5a203ec6-1011-4cb9-aed1-487f268cd2be"
+          }
+        ]
+      }
+    },
+    {
+      "id": "5ee3f22f-81e0-4ab7-bb1a-12afa6c4733b_projector",
+      "name": "projectNameFromPerson",
+      "description": null,
+      "service": { "id": "donald-simple", "name": "Simple" },
+      "arguments": [
+        {
+          "id": "6da451a4-3705-47cf-a2ab-f26b57857755",
+          "name": "person",
+          "type": "KIND",
+          "modifiers": ["NONULL"],
+          "typeKindId": "e0697c99-eeb6-4a12-8e9c-caf5b15bc798",
+          "kind": {
+            "id": "e0697c99-eeb6-4a12-8e9c-caf5b15bc798",
+            "name": "Person",
+            "service": { "id": "io.maana.q.common", "name": "Maana Common" }
+          }
+        }
+      ],
+      "implementation": {
+        "id": "f0484af9-2af1-4f3c-b8b7-b830cdb43861",
+        "entrypoint": { "id": "fe1f5d37-b11b-4aae-a29b-9c6163b58c1a" },
+        "operations": [
+          {
+            "id": "fe1f5d37-b11b-4aae-a29b-9c6163b58c1a",
+            "type": "APPLY",
+            "function": {
+              "id": "83f55319-6a6a-4466-a80c-c56641389dbb",
+              "name": "projectNameFromPerson",
+              "service": {
+                "id": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda",
+                "name": "fafa0f41-373d-4c78-a15e-9d3a322fa36d_lambda"
+              }
+            },
+            "argumentValues": [
+              {
+                "id": "d554cfd3-93e6-4485-a90a-6d0f37ccecf8",
+                "argument": {
+                  "id": "02a7549c-d6e1-49d4-9944-29382f283943",
+                  "name": "person"
+                },
+                "operation": null,
+                "argumentRef": {
+                  "id": "6da451a4-3705-47cf-a2ab-f26b57857755",
+                  "name": "person"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "functionType": "CKG",
+      "graphqlOperationType": "QUERY",
+      "outputType": "STRING",
+      "outputKindId": null,
+      "outputModifiers": ["NONULL"],
+      "kind": null,
+      "graph": {
+        "zoom": 100,
+        "offsetX": 0,
+        "offsetY": 0,
+        "nodes": [
+          {
+            "id": "3fed31a1-c0a6-4610-ae2f-6c20bf2dc9f9INPUT",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "df8dae1e-bf3b-4234-b4d7-339c3c4f8fd3OUTPUT",
+            "x": 450,
+            "y": 25,
+            "collapsed": false,
+            "operationId": null
+          },
+          {
+            "id": "28a5fdbe-27fa-43d5-8927-7aa08946d04a",
+            "x": 25,
+            "y": 25,
+            "collapsed": false,
+            "operationId": "fe1f5d37-b11b-4aae-a29b-9c6163b58c1a"
           }
         ]
       }
@@ -1059,34 +1336,24 @@
       "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384_projector",
       "name": "projectJsonFromBuzz",
       "description": null,
-      "service": {
-        "id": "donald-simple",
-        "name": "Simple"
-      },
+      "service": { "id": "donald-simple", "name": "Simple" },
       "arguments": [
         {
           "id": "33bb69ca-654f-49a7-a302-35b6a4dce57c",
           "name": "buzz",
           "type": "KIND",
-          "modifiers": [
-            "NONULL"
-          ],
+          "modifiers": ["NONULL"],
           "typeKindId": "241f99f5-00f6-4ec3-a541-96e5b8013263",
           "kind": {
             "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
             "name": "Buzz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            }
+            "service": { "id": "donald-simple", "name": "Simple" }
           }
         }
       ],
       "implementation": {
         "id": "f591db20-4130-4297-bb2b-4f89328b8739",
-        "entrypoint": {
-          "id": "a641ca7c-8523-4a8f-86ad-18e6d5a55a8f"
-        },
+        "entrypoint": { "id": "a641ca7c-8523-4a8f-86ad-18e6d5a55a8f" },
         "operations": [
           {
             "id": "a641ca7c-8523-4a8f-86ad-18e6d5a55a8f",
@@ -1157,6 +1424,11 @@
       "id": "io.maana.scalars",
       "name": "Maana Scalars",
       "endpointUrl": "http://40.69.154.190:8050/graphql"
+    },
+    {
+      "id": "io.maana.q.common",
+      "name": "Maana Common",
+      "endpointUrl": "https://lastknowngood.knowledge.maana.io:8443/service/io.maana.q.common/graphql"
     }
   ],
   "assistants": [
@@ -1164,10 +1436,7 @@
       "id": "io.maana.export-import-assistant",
       "name": "Export Import Assistant"
     },
-    {
-      "id": "io.maana.lambda-assistant",
-      "name": "Lambda Assistant"
-    },
+    { "id": "io.maana.lambda-assistant", "name": "Lambda Assistant" },
     {
       "id": "7a9f6993-e4d2-4016-aa8a-2df6e1cc6147",
       "name": "Workspace Dev Assistant - Beta"
@@ -1178,23 +1447,13 @@
       "id": "271eba2f-4850-441c-b744-fd80c5932589",
       "name": "bar",
       "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
-      "runtime": {
-        "id": "Q+JavaScript"
-      },
+      "runtime": { "id": "Q+JavaScript" },
       "code": "return input.dateTime;",
       "input": [
-        {
-          "name": "dateTime",
-          "kind": "DATETIME",
-          "modifiers": [
-            "NONULL"
-          ]
-        }
+        { "name": "dateTime", "kind": "DATETIME", "modifiers": ["NONULL"] }
       ],
       "outputKind": "STRING",
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kinds": [],
       "graphQLOperationType": "QUERY"
     },
@@ -1202,30 +1461,14 @@
       "id": "dcc895b8-2610-4af4-bc9e-cf1d0c1f4c77",
       "name": "qux",
       "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
-      "runtime": {
-        "id": "Q+JavaScript"
-      },
+      "runtime": { "id": "Q+JavaScript" },
       "code": "return `${input.bar}:${input.baz}`;",
       "input": [
-        {
-          "name": "bar",
-          "kind": "STRING",
-          "modifiers": [
-            "NONULL"
-          ]
-        },
-        {
-          "name": "baz",
-          "kind": "STRING",
-          "modifiers": [
-            "NONULL"
-          ]
-        }
+        { "name": "bar", "kind": "STRING", "modifiers": ["NONULL"] },
+        { "name": "baz", "kind": "STRING", "modifiers": ["NONULL"] }
       ],
       "outputKind": "STRING",
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kinds": [],
       "graphQLOperationType": "QUERY"
     },
@@ -1233,65 +1476,39 @@
       "id": "a35d961a-9cab-43e7-a991-e4a2fc350294_projector",
       "name": "projectCreatedOnFromFizz",
       "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
-      "runtime": {
-        "id": "Q+JavaScript"
-      },
+      "runtime": { "id": "Q+JavaScript" },
       "code": "const { fizz } = input;\nreturn fizz.createdOn",
       "input": [
-        {
-          "name": "fizz",
-          "kind": "FizzInput",
-          "modifiers": [
-            "NONULL"
-          ]
-        }
+        { "name": "fizz", "kind": "FizzInput", "modifiers": ["NONULL"] }
       ],
       "outputKind": "DATETIME",
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kinds": [
         {
           "name": "FizzInput",
           "fields": [
-            {
-              "name": "id",
-              "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
-            },
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
             {
               "name": "createdOn",
               "kind": "DATETIME",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             },
-            {
-              "name": "buzz",
-              "kind": "BuzzInput",
-              "modifiers": [
-                "NONULL"
-              ]
-            }
+            { "name": "buzz", "kind": "BuzzInput", "modifiers": ["NONULL"] },
+            { "name": "person", "kind": "PersonInput", "modifiers": ["NONULL"] }
           ]
         },
         {
           "name": "BuzzInput",
           "fields": [
-            {
-              "name": "id",
-              "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
-            },
-            {
-              "name": "json",
-              "kind": "JSON",
-              "modifiers": []
-            }
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "json", "kind": "JSON", "modifiers": [] }
+          ]
+        },
+        {
+          "name": "PersonInput",
+          "fields": [
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "name", "kind": "STRING", "modifiers": ["NONULL"] }
           ]
         }
       ],
@@ -1301,82 +1518,46 @@
       "id": "2d9c394c-614e-4876-8334-c35238657cc9_projector",
       "name": "projectBuzzFromFizz",
       "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
-      "runtime": {
-        "id": "Q+JavaScript"
-      },
+      "runtime": { "id": "Q+JavaScript" },
       "code": "const { fizz } = input;\nreturn fizz.buzz",
       "input": [
-        {
-          "name": "fizz",
-          "kind": "FizzInput",
-          "modifiers": [
-            "NONULL"
-          ]
-        }
+        { "name": "fizz", "kind": "FizzInput", "modifiers": ["NONULL"] }
       ],
       "outputKind": "Buzz",
-      "outputModifiers": [
-        "NONULL"
-      ],
+      "outputModifiers": ["NONULL"],
       "kinds": [
         {
           "name": "FizzInput",
           "fields": [
-            {
-              "name": "id",
-              "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
-            },
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
             {
               "name": "createdOn",
               "kind": "DATETIME",
-              "modifiers": [
-                "NONULL"
-              ]
+              "modifiers": ["NONULL"]
             },
-            {
-              "name": "buzz",
-              "kind": "BuzzInput",
-              "modifiers": [
-                "NONULL"
-              ]
-            }
+            { "name": "buzz", "kind": "BuzzInput", "modifiers": ["NONULL"] },
+            { "name": "person", "kind": "PersonInput", "modifiers": ["NONULL"] }
           ]
         },
         {
           "name": "BuzzInput",
           "fields": [
-            {
-              "name": "id",
-              "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
-            },
-            {
-              "name": "json",
-              "kind": "JSON",
-              "modifiers": []
-            }
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "json", "kind": "JSON", "modifiers": [] }
+          ]
+        },
+        {
+          "name": "PersonInput",
+          "fields": [
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "name", "kind": "STRING", "modifiers": ["NONULL"] }
           ]
         },
         {
           "name": "Buzz",
           "fields": [
-            {
-              "name": "id",
-              "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
-            },
-            {
-              "name": "json",
-              "kind": "JSON",
-              "modifiers": []
-            }
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "json", "kind": "JSON", "modifiers": [] }
           ]
         }
       ],
@@ -1386,18 +1567,10 @@
       "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384_projector",
       "name": "projectJsonFromBuzz",
       "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
-      "runtime": {
-        "id": "Q+JavaScript"
-      },
+      "runtime": { "id": "Q+JavaScript" },
       "code": "const { buzz } = input;\nreturn buzz.json",
       "input": [
-        {
-          "name": "buzz",
-          "kind": "BuzzInput",
-          "modifiers": [
-            "NONULL"
-          ]
-        }
+        { "name": "buzz", "kind": "BuzzInput", "modifiers": ["NONULL"] }
       ],
       "outputKind": "JSON",
       "outputModifiers": [],
@@ -1405,18 +1578,8 @@
         {
           "name": "BuzzInput",
           "fields": [
-            {
-              "name": "id",
-              "kind": "ID",
-              "modifiers": [
-                "NONULL"
-              ]
-            },
-            {
-              "name": "json",
-              "kind": "JSON",
-              "modifiers": []
-            }
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "json", "kind": "JSON", "modifiers": [] }
           ]
         }
       ],
@@ -1426,33 +1589,172 @@
       "id": "bfc15d43-df5a-42f1-923f-d3b2ec1e8dc1",
       "name": "jsonToString",
       "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
-      "runtime": {
-        "id": "Q+JavaScript"
-      },
+      "runtime": { "id": "Q+JavaScript" },
       "code": "return JSON.stringify(input.json) || \"\"",
+      "input": [{ "name": "json", "kind": "JSON", "modifiers": [] }],
+      "outputKind": "STRING",
+      "outputModifiers": ["NONULL"],
+      "kinds": [],
+      "graphQLOperationType": "QUERY"
+    },
+    {
+      "id": "3a27ae7d-7b86-4a39-bee0-2ac2c69ec68f_projector",
+      "name": "projectPersonFromFizz",
+      "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
+      "runtime": { "id": "Q+JavaScript" },
+      "code": "const { fizz } = input;\nreturn fizz.person",
       "input": [
+        { "name": "fizz", "kind": "FizzInput", "modifiers": ["NONULL"] }
+      ],
+      "outputKind": "Person",
+      "outputModifiers": ["NONULL"],
+      "kinds": [
         {
-          "name": "json",
-          "kind": "JSON",
-          "modifiers": []
+          "name": "FizzInput",
+          "fields": [
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            {
+              "name": "createdOn",
+              "kind": "DATETIME",
+              "modifiers": ["NONULL"]
+            },
+            { "name": "buzz", "kind": "BuzzInput", "modifiers": ["NONULL"] },
+            { "name": "person", "kind": "PersonInput", "modifiers": ["NONULL"] }
+          ]
+        },
+        {
+          "name": "BuzzInput",
+          "fields": [
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "json", "kind": "JSON", "modifiers": [] }
+          ]
+        },
+        {
+          "name": "PersonInput",
+          "fields": [
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "name", "kind": "STRING", "modifiers": ["NONULL"] }
+          ]
+        },
+        {
+          "name": "Person",
+          "fields": [
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "name", "kind": "STRING", "modifiers": ["NONULL"] }
+          ]
         }
       ],
-      "outputKind": "STRING",
-      "outputModifiers": [
-        "NONULL"
+      "graphQLOperationType": "QUERY"
+    },
+    {
+      "id": "5ee3f22f-81e0-4ab7-bb1a-12afa6c4733b_projector",
+      "name": "projectNameFromPerson",
+      "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
+      "runtime": { "id": "Q+JavaScript" },
+      "code": "const { person } = input;\nreturn person.name",
+      "input": [
+        { "name": "person", "kind": "PersonInput", "modifiers": ["NONULL"] }
       ],
-      "kinds": [],
+      "outputKind": "STRING",
+      "outputModifiers": ["NONULL"],
+      "kinds": [
+        {
+          "name": "PersonInput",
+          "fields": [
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "name", "kind": "STRING", "modifiers": ["NONULL"] },
+            { "name": "email", "kind": "STRING", "modifiers": [] },
+            { "name": "jobTitle", "kind": "STRING", "modifiers": [] },
+            {
+              "name": "knowsAbout",
+              "kind": "ThingInput",
+              "modifiers": ["LIST"]
+            },
+            { "name": "knows", "kind": "PersonInput", "modifiers": ["LIST"] }
+          ]
+        },
+        {
+          "name": "ThingInput",
+          "fields": [
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "name", "kind": "STRING", "modifiers": ["NONULL"] },
+            {
+              "name": "additionalTypes",
+              "kind": "URLInput",
+              "modifiers": ["LIST"]
+            },
+            { "name": "url", "kind": "URLInput", "modifiers": [] },
+            { "name": "sameAs", "kind": "URLInput", "modifiers": ["LIST"] }
+          ]
+        },
+        {
+          "name": "URLInput",
+          "fields": [{ "name": "id", "kind": "ID", "modifiers": ["NONULL"] }]
+        }
+      ],
+      "graphQLOperationType": "QUERY"
+    },
+    {
+      "id": "d5b61fce-a950-4cae-920b-63715c6e8967",
+      "name": "freePerson",
+      "serviceId": "fafa0f41-373d-4c78-a15e-9d3a322fa36d",
+      "runtime": { "id": "Q+JavaScript" },
+      "code": "return input.person",
+      "input": [
+        { "name": "person", "kind": "PersonInput", "modifiers": ["NONULL"] }
+      ],
+      "outputKind": "Person",
+      "outputModifiers": ["NONULL"],
+      "kinds": [
+        {
+          "name": "PersonInput",
+          "fields": [
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "name", "kind": "STRING", "modifiers": ["NONULL"] }
+          ]
+        },
+        {
+          "name": "Thing",
+          "fields": [
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "name", "kind": "STRING", "modifiers": ["NONULL"] },
+            { "name": "additionalTypes", "kind": "URL", "modifiers": ["LIST"] },
+            { "name": "url", "kind": "URL", "modifiers": [] },
+            { "name": "sameAs", "kind": "URL", "modifiers": ["LIST"] }
+          ]
+        },
+        {
+          "name": "URL",
+          "fields": [{ "name": "id", "kind": "ID", "modifiers": ["NONULL"] }]
+        },
+        {
+          "name": "Person",
+          "fields": [
+            { "name": "id", "kind": "ID", "modifiers": ["NONULL"] },
+            { "name": "name", "kind": "STRING", "modifiers": ["NONULL"] },
+            { "name": "email", "kind": "STRING", "modifiers": [] },
+            { "name": "jobTitle", "kind": "STRING", "modifiers": [] },
+            { "name": "knowsAbout", "kind": "Thing", "modifiers": ["LIST"] },
+            { "name": "knows", "kind": "Person", "modifiers": ["LIST"] }
+          ]
+        }
+      ],
       "graphQLOperationType": "QUERY"
     }
   ],
   "endpointServiceId": "donald-simple",
+  "currentSelection": {
+    "id": "11202148-f939-4c08-8535-ca1e0da453b3",
+    "kindId": null,
+    "kindName": "Function"
+  },
   "knowledgeGraphs": [
     {
       "id": "84636eb1-6248-4483-94af-95dfbf49f75f",
       "name": "New Knowledge Graph",
-      "offsetX": 112,
-      "offsetY": 248,
-      "zoom": 100,
+      "offsetX": 297.08,
+      "offsetY": 223.62,
+      "zoom": 100.1,
       "nodes": [
         {
           "id": "635ed972-2361-4152-907c-0dfbf7dacab5",
@@ -1462,10 +1764,7 @@
           "function": {
             "id": "f885d013-14ce-4330-abe2-08d2c51db7dd",
             "name": "foo",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            },
+            "service": { "id": "donald-simple", "name": "Simple" },
             "isGenerated": false
           }
         },
@@ -1477,10 +1776,7 @@
           "function": {
             "id": "271eba2f-4850-441c-b744-fd80c5932589",
             "name": "bar",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            },
+            "service": { "id": "donald-simple", "name": "Simple" },
             "isGenerated": false
           }
         },
@@ -1492,70 +1788,55 @@
           "function": {
             "id": "dcc895b8-2610-4af4-bc9e-cf1d0c1f4c77",
             "name": "qux",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            },
+            "service": { "id": "donald-simple", "name": "Simple" },
             "isGenerated": false
           }
         },
         {
           "id": "6df4ac55-0da3-443e-a134-c9473ec4f2f5",
-          "x": 192,
+          "x": 224,
           "y": 0,
           "collapsed": false,
           "kind": {
             "id": "2f1e171b-fbd5-4a08-9632-ff3c24d95c89",
             "name": "Fizz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            },
+            "service": { "id": "donald-simple", "name": "Simple" },
             "isGenerated": false
           }
         },
         {
           "id": "c12c0e9f-5b4b-4c86-9a4d-992e0f71519c",
-          "x": 416,
-          "y": 0,
+          "x": 480,
+          "y": 192,
           "collapsed": false,
           "kind": {
             "id": "241f99f5-00f6-4ec3-a541-96e5b8013263",
             "name": "Buzz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            },
+            "service": { "id": "donald-simple", "name": "Simple" },
             "isGenerated": false
           }
         },
         {
           "id": "ab6b3008-fee8-494f-8d72-ba74e16a7a6d",
           "x": -64,
-          "y": 128,
+          "y": 0,
           "collapsed": false,
           "function": {
             "id": "a35d961a-9cab-43e7-a991-e4a2fc350294_projector",
             "name": "projectCreatedOnFromFizz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            },
+            "service": { "id": "donald-simple", "name": "Simple" },
             "isGenerated": false
           }
         },
         {
           "id": "d236d54a-e478-45ad-8fcf-aed3cf1aa6ef",
           "x": -64,
-          "y": 0,
+          "y": 128,
           "collapsed": false,
           "function": {
             "id": "2d9c394c-614e-4876-8334-c35238657cc9_projector",
             "name": "projectBuzzFromFizz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            },
+            "service": { "id": "donald-simple", "name": "Simple" },
             "isGenerated": false
           }
         },
@@ -1567,10 +1848,7 @@
           "function": {
             "id": "f9f24c35-f923-4d36-8b34-2a4db20b6384_projector",
             "name": "projectJsonFromBuzz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            },
+            "service": { "id": "donald-simple", "name": "Simple" },
             "isGenerated": false
           }
         },
@@ -1582,10 +1860,67 @@
           "function": {
             "id": "5276ddea-26b7-4686-bd5b-c310564cdd63",
             "name": "baz",
-            "service": {
-              "id": "donald-simple",
-              "name": "Simple"
-            },
+            "service": { "id": "donald-simple", "name": "Simple" },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "e4675d63-b9b1-4770-901f-d0418c495278",
+          "x": 480,
+          "y": 448,
+          "collapsed": false,
+          "kind": {
+            "id": "e0697c99-eeb6-4a12-8e9c-caf5b15bc798",
+            "name": "Person",
+            "service": { "id": "io.maana.q.common", "name": "Maana Common" },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "e2f987dd-1e72-415d-ba5e-d715b0b20cf3",
+          "x": 480,
+          "y": 320,
+          "collapsed": false,
+          "kind": {
+            "id": "123ce0ab-fe3e-4cbc-a047-adba802b74d4",
+            "name": "Person",
+            "service": { "id": "donald-simple", "name": "Simple" },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "0e6ed355-2ca7-419d-a30e-53d5bccf8e9b",
+          "x": -64,
+          "y": 384,
+          "collapsed": false,
+          "function": {
+            "id": "3a27ae7d-7b86-4a39-bee0-2ac2c69ec68f_projector",
+            "name": "projectPersonFromFizz",
+            "service": { "id": "donald-simple", "name": "Simple" },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "29e2cf2c-055e-487d-a07f-79b8a93fa65f",
+          "x": 256,
+          "y": 448,
+          "collapsed": false,
+          "function": {
+            "id": "d5b61fce-a950-4cae-920b-63715c6e8967",
+            "name": "freePerson",
+            "service": { "id": "donald-simple", "name": "Simple" },
+            "isGenerated": false
+          }
+        },
+        {
+          "id": "289b9a7b-6e0e-407d-a823-e668c11d9132",
+          "x": 256,
+          "y": 576,
+          "collapsed": false,
+          "function": {
+            "id": "5ee3f22f-81e0-4ab7-bb1a-12afa6c4733b_projector",
+            "name": "projectNameFromPerson",
+            "service": { "id": "donald-simple", "name": "Simple" },
             "isGenerated": false
           }
         }
@@ -1609,6 +1944,14 @@
       {
         "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:updateinput",
         "name": "UpdateFizzInput"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:addinput",
+        "name": "AddPersonInput"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:updateinput",
+        "name": "UpdatePersonInput"
       }
     ],
     "functions": [
@@ -1691,6 +2034,46 @@
       {
         "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:2f1e171b-fbd5-4a08-9632-ff3c24d95c89:deleteMany",
         "name": "deleteFizzs"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:queryOne",
+        "name": "person"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:queryMany",
+        "name": "persons"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:queryAll",
+        "name": "allPersons"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:filter",
+        "name": "personFilter"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:addOne",
+        "name": "addPerson"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:addMany",
+        "name": "addPersons"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:updateOne",
+        "name": "updatePerson"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:updateMany",
+        "name": "updatePersons"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:deleteOne",
+        "name": "deletePerson"
+      },
+      {
+        "id": "877af5df-e55d-4e64-bfa8-0715367ccab0:123ce0ab-fe3e-4cbc-a047-adba802b74d4:deleteMany",
+        "name": "deletePersons"
       }
     ]
   }
