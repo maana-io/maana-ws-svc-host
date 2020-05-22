@@ -2,9 +2,9 @@
 import { NodeVM } from 'vm2'
 
 // --- Internal imports
-import { log } from './utils.js'
-import { requestCkg } from './requestCkg.js'
-import { getCKGToken } from './auth'
+import { log } from '../utils.js'
+import { requestCkg } from '../requestCkg.js'
+import { getCKGToken } from '../auth'
 
 // --- Functions
 const runJavaScript = async ({ input, lambda, context }) => {

@@ -1,12 +1,7 @@
-// --- Exdternal imports
+// --- External imports
+
 import { addResolversToSchema } from 'graphql-tools'
 import {
-  buildClientSchema,
-  getIntrospectionQuery,
-  getNamedType,
-  getNullableType,
-  isListType,
-  isNonNullType,
   GraphQLBoolean,
   GraphQLString,
   GraphQLInt,
@@ -21,16 +16,12 @@ import {
 import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date'
 import { GraphQLJSON } from 'graphql-type-json'
 import { request } from 'graphql-request'
-import { fetch } from 'cross-fetch'
 import hash from 'object-hash'
 import LRU from 'lru-cache'
 
-// --- Internal imports
-import { getCKGToken } from './auth'
-import env from './environment'
-import { requestCkg, requestCkgEndpointUrl } from './requestCkg'
-import { compose, log } from './utils'
-import runJavaScript from './runJavascript'
+import { compose, log } from '../utils'
+import runJavaScript from '../lambda/runJavascript'
+import { indexRemoteService } from './remote'
 
 // --- Constants
 
@@ -77,39 +68,24 @@ const FnTypeEnum = {
   Service: 'Service',
 }
 
-// ---
-
-const getRemoteSchema = async (endpointUrl) => {
-  const query = getIntrospectionQuery()
-  if (endpointUrl.startsWith(env.ckgEndpointUrl)) {
-    let token
-    try {
-      token = await getCKGToken()
-    } catch (error) {
-      log.error(`Error getting token: ${error}`)
-      throw error
-    }
-    const ckgResult = await requestCkgEndpointUrl({ endpointUrl, query, token })
-    return { data: ckgResult }
-  }
-
-  const fetchResult = await fetch(endpointUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ query }),
-  })
-  return fetchResult.json()
-}
-
-// ---
-
-const indexKinds = (kinds) =>
-  kinds.reduce((idx, kind) => {
+const indexKinds = (kinds) => {
+  // Index the individual sources of kinds
+  const remote = indexRemoteKinds(ws)
+  const local = kinds.reduce((idx, kind) => {
     idx[kind.name] = kind
     return idx
   }, {})
+
+  // Combine into a unified index
+  return [remote, local].reduce(
+    (idx, cur) =>
+      Object.values(cur).reduce((idx, kind) => {
+        idx[kind.id] = kind
+        return idx
+      }, {}),
+    {}
+  )
+}
 
 const indexLambdas = (ws) =>
   ws.lambda.reduce((idx, lambda) => {
@@ -164,74 +140,28 @@ const indexFunctionGraphs = (ws) =>
     return idx
   }, {})
 
-const indexServices = async (ws) =>
-  await ws.services.reduce(async (idx, svc) => {
-    const remoteSchema = await getRemoteSchema(svc.endpointUrl)
-    const clientSchema = buildClientSchema(remoteSchema.data)
-
-    const indexType = (idx, type, graphqlOperationType) => {
-      const id = `${svc.id}/${type.name}`
-      idx[id] = {
-        // Common function description
-        id,
-        name: type.name,
-        description: type.description,
-        graphqlOperationType,
-        input: type.args.reduce((args, arg) => {
-          args[arg.name] = {
-            name: arg.name,
-            description: arg.description,
-            ...graphQLTypeRefToKind(arg.type),
-          }
-          return args
-        }, {}),
-        output: {
-          ...graphQLTypeRefToKind(type.type),
-        },
-        // Remote-specific
-        endpointUrl: svc.endpointUrl,
-      }
-    }
-
-    idx = Object.values(clientSchema._queryType._fields).reduce((idx, type) => {
-      indexType(idx, type, 'QUERY')
-      return idx
-    }, idx)
-
-    idx = Object.values(clientSchema._mutationType._fields).reduce(
-      (idx, type) => {
-        indexType(idx, type, 'MUTATION')
-        return idx
-      },
-      idx
-    )
-
-    return idx
-  }, {})
-
 const indexFunctions = async (ws) => {
-  const fnGraphIdx = indexFunctionGraphs(ws)
-  const lambdaIdx = indexLambdas(ws)
-  const serviceIdx = await indexServices(ws)
-  const functionIdx = [fnGraphIdx, lambdaIdx, serviceIdx].reduce(
+  // Index the individual sources of functions
+  const remote = indexRemoteFunctions(ws)
+  const lambda = indexLambdas(ws)
+  const fgs = indexFunctionGraphs(ws)
+
+  // Combine into a unified function index
+  return [fgs, lambda, remote].reduce(
     (idx, cur) =>
       Object.values(cur).reduce((idx, fn) => {
         idx[fn.id] = fn
         return idx
-      }, {}),
+      }, idx),
     {}
   )
-  return {
-    fnGraphIdx,
-    lambdaIdx,
-    serviceIdx,
-    functionIdx,
-  }
 }
 
 const indexWorkspace = async (ws) => ({
-  ...(await indexFunctions(ws)),
+  // fetch remote services first, then index all the Kinds and functions
+  serviceIdx: await indexRemoteService(ws),
   kindIdx: indexKinds(ws.kinds),
+  fnIdx: indexFunctions(ws),
 })
 
 // ---
@@ -293,23 +223,6 @@ const fnToGraphQLField = (state, fn) => {
     }, {}),
   }
   return field
-}
-
-const graphQLTypeRefToKind = (graphQLTypeRef) => {
-  let modifiers = []
-  if (isNonNullType(graphQLTypeRef)) {
-    modifiers.push('NONULL')
-    const innerType = getNullableType(graphQLTypeRef)
-    if (isListType(innerType)) {
-      modifiers.push('LIST')
-    }
-  } else if (isListType(graphQLTypeRef)) {
-    modifiers.push('LIST')
-  }
-  return {
-    kind: getNamedType(graphQLTypeRef),
-    modifiers,
-  }
 }
 
 // ---
